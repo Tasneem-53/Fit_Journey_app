@@ -6,15 +6,15 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.daclink.fitjourney.Database.entities.User;
+import com.daclink.fitjourney.Database.entities.Exercise;
 
 import java.util.ArrayList;
 
 @Dao
 public interface FitJourneyDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User user);
+    void insert(Exercise exercise);
 
-    @Query("Select * from " + FitJourneyDatabase.USER_TABLE)
-    ArrayList<User> getAllRecords();
+    @Query("Select * from " + FitJourneyDatabase.EXERCISE_TABLE)
+    ArrayList<Exercise> getAllRecords();
 }

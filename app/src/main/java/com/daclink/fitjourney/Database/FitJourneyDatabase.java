@@ -10,18 +10,18 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.daclink.fitjourney.Database.entities.User;
+import com.daclink.fitjourney.Database.entities.Exercise;
 import com.daclink.fitjourney.MainActivity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+@Database(entities = {Exercise.class}, version = 1, exportSchema = false)
 public abstract class FitJourneyDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "FitJourney Database";
 
-    public static final String USER_TABLE = "User";
+    public static final String EXERCISE_TABLE = "Exercise";
 
     private static volatile FitJourneyDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
