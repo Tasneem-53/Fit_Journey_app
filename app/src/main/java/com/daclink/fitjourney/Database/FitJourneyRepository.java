@@ -36,12 +36,12 @@ public class FitJourneyRepository {
         try {
             return future.get();
         }catch (InterruptedException | ExecutionException e){
-            Log.i(MainActivity.TAG, "Problem when getting all UserLogs in the repository");
+            Log.i(MainActivity.TAG, "Problem when getting all ExerciseLogs in the repository");
         }
         return null;
     }
 
-public void insertUser(Exercise exercise){
+public void insertExercise(Exercise exercise){
         FitJourneyDatabase.databaseWriteExecutor.execute(() ->
         {
             fitJourneyDAO.insert(exercise);
