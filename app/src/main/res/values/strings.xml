@@ -8,4 +8,10 @@
     <string name="enter_reps">Enter reps</string>
     <string name="reps">Reps</string>
     <string name="log">Log!</string>
+    <string name="delete_user_admin">Delete User/Admin</string>
+    <string name="display_users">Display Users</string>
+    <string name="user_admin">User/Admin</string>
+    <string name="delete_User_admin">Delete User/Admin</string>
+    <string name="user_">User/Admin</string>
+    <string name="delete">Delete</string>
 </resources>

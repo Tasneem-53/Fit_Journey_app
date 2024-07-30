@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Delete">
+
+    <TextView
+        android:id="@+id/deleteUserAdmin"
+        android:layout_width="341dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:padding="8dp"
+        android:text="@string/delete_user_admin"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userLogTextView"
+        android:layout_width="390dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/display_users"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteUserAdmin" />
+
+    <TextView
+        android:id="@+id/userAdminLabelTextView"
+        android:layout_width="144dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/user_admin"
+        android:textSize="19sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userLogTextView" />
+
+    <TextView
+        android:id="@+id/deleteUserAdminLabelTextView"
+        android:layout_width="189dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/delete_User_admin"
+        android:textSize="21sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userAdminLabelTextView" />
+
+    <Button
+        android:id="@+id/userAdminButton"
+        android:layout_width="144dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="56dp"
+        android:text="@string/user_"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userLogTextView" />
+
+    <Button
+        android:id="@+id/userAdminDeleteButton"
+        android:layout_width="144dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/delete"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userAdminButton" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        tools:layout_editor_absoluteX="170dp"
+        tools:layout_editor_absoluteY="569dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
