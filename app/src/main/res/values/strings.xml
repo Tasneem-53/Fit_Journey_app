@@ -22,4 +22,11 @@
     <string name="settings">Settings</string>
     <string name="hello_adminname">Hello \'adminName\'</string>
     <string name="welcome_admin">Welcome Admin!</string>
+    <string name="admin_page">Admin Page</string>
+    <string name="delete_user">Delete User</string>
+    <string name="home">Home</string>
+    <string name="add_a_admin">Add a Admin</string>
+    <string name="delete_a_user">Delete a User</string>
+    <string name="add_a_admin_user">Add a Admin User</string>
+    <string name="go_back_home">Go Back Home</string>
 </resources>
