@@ -14,4 +14,13 @@
     <string name="delete_User_admin">Delete User/Admin</string>
     <string name="user_">User/Admin</string>
     <string name="delete">Delete</string>
+    <string name="add_admin">Add Admin</string>
+    <string name="display_user">Display Users</string>
+    <string name="new_admin">New Admin</string>
+    <string name="new_admin_user">New Admin</string>
+    <string name="new_admin_pw">New Admin Password</string>
+    <string name="new_admin_users">New Admin User</string>
+    <string name="new_admin_password">New Admin Password</string>
+    <string name="create_new_admin">Create New Admin</string>
+    <string name="home">Home</string>
 </resources>
