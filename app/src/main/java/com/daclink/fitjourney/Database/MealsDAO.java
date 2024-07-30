@@ -9,7 +9,7 @@ import androidx.room.Query;
 import com.daclink.fitjourney.Database.entities.Meals;
 
 import java.util.List;
-
+//Doa
 @Dao
 public interface MealsDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
