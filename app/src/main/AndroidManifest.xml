@@ -13,10 +13,13 @@
         android:theme="@style/Theme.FitJourney"
         tools:targetApi="31">
         <activity
-            android:name=".AddUserAdmin"
+            android:name=".activity_exercises"
             android:exported="false" />
         <activity
-            android:name=".Delete"
+            android:name=".activity_meals"
+            android:exported="false" />
+        <activity
+            android:name=".activity_create_account"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
