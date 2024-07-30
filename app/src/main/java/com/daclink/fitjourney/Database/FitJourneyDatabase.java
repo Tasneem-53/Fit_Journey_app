@@ -23,6 +23,8 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
 
     public static final String EXERCISE_TABLE = "ExerciseTable";
 
+    public static final String MEALS_TABLE = "MealTable";
+
     private static volatile FitJourneyDatabase INSTANCE;
 
     private static final int NUMBER_OF_THREADS = 4;
