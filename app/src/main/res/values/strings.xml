@@ -29,4 +29,7 @@
     <string name="delete_a_user">Delete a User</string>
     <string name="add_a_admin_user">Add a Admin User</string>
     <string name="go_back_home">Go Back Home</string>
+    <string name="fit_journey_nweclome">Fit Journey\nWeclome</string>
+    <string name="welcome_nfit_journey">Welcome \nFit Journey</string>
+    <string name="hello_user_admin">Hello + \'User/Admin\'</string>
 </resources>

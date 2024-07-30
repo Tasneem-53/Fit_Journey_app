@@ -21,9 +21,10 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "FitJourney Database";
 
-    public static final String EXERCISE_TABLE = "Exercise";
+    public static final String EXERCISE_TABLE = "ExerciseTable";
 
     private static volatile FitJourneyDatabase INSTANCE;
+
     private static final int NUMBER_OF_THREADS = 4;
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
@@ -35,7 +36,7 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             FitJourneyDatabase.class,
-                                        DATABASE_NAME
+                                    DATABASE_NAME
                             )
                             .fallbackToDestructiveMigration()
                             .addCallback(addDefaultValues)
@@ -45,7 +46,7 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
-
+    //this is a way to insert default records into the data, add users, add defalut users
     private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback(){
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db){
