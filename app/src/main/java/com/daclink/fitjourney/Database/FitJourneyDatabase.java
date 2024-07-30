@@ -59,5 +59,6 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
     };
 
     public abstract FitJourneyDAO fitJourneyDAO();
+    public abstract MealsDAO mealsDAO();
 
 }
