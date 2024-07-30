@@ -7,8 +7,10 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.daclink.fitjourney.Database.entities.Exercise;
+import com.daclink.fitjourney.Database.entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Dao
 public interface FitJourneyDAO {
@@ -17,4 +19,13 @@ public interface FitJourneyDAO {
 
     @Query("Select * from " + FitJourneyDatabase.EXERCISE_TABLE)
     ArrayList<Exercise> getAllRecords();
+
+    @Insert
+    void insert(User user);
+
+    @Query("SELECT * FROM User WHERE username = :username")
+    User getUserByUsername(String username);
+
+    @Query("SELECT * FROM User")
+    List<User> getAllUsers();
 }
