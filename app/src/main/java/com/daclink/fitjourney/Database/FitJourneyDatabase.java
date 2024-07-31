@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.daclink.fitjourney.Database.entities.Exercise;
@@ -18,7 +19,8 @@ import com.daclink.fitjourney.MainActivity;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Exercise.class, Meals.class, User.class }, version = 1, exportSchema = false)
+@Database(entities = {Exercise.class, Meals.class, User.class }, version = 3, exportSchema = false)
+@TypeConverters(DateConverter.class)
 public abstract class FitJourneyDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "FitJourney Database";
@@ -64,5 +66,8 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
     };
 
     public abstract FitJourneyDAO fitJourneyDAO();
+    public abstract MealsDAO mealsDAO();
+    public abstract UserDAO userDAO();
+    public abstract ExerciseDAO exerciseDAO();
 
 }
