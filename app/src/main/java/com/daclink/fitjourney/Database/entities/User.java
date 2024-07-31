@@ -3,7 +3,9 @@ package com.daclink.fitjourney.Database.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "User")
+import com.daclink.fitjourney.Database.FitJourneyDatabase;
+
+@Entity(tableName = FitJourneyDatabase.USER_TABLE)
 public class User {
 
     @PrimaryKey(autoGenerate = true)
