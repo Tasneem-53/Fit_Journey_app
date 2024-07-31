@@ -1,7 +1,5 @@
 package com.daclink.fitjourney;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -18,9 +16,9 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-private ActivityMainBinding binding;
+ActivityMainBinding binding;
 
-public static final String TAG = "TEC_OTTERS_FitJOURNEY";
+public static final String TAG = "DAC_GYMLOG";
 
 String mExercise = "" ;
 
@@ -32,12 +30,6 @@ int mReps = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
-    }
-
-}
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -74,6 +66,5 @@ int mReps = 0;
     }
 
     }
-
 
 

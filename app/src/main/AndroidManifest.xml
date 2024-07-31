@@ -13,16 +13,13 @@
         android:theme="@style/Theme.FitJourney"
         tools:targetApi="31">
         <activity
-            android:name=".AdminPageActivity"
+            android:name=".Settings"
             android:exported="false" />
         <activity
-            android:name=".WeclomeUserActivity"
+            android:name=".AddUserAdmin"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FitJourneyLogin"
+            android:name=".Delete"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

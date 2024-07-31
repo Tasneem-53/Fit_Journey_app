@@ -13,13 +13,13 @@ import java.util.Objects;
 public class Exercise {
 
     @PrimaryKey(autoGenerate = true)
-    private int Id;
+    private int id;
 
 
+    private LocalDate date;
     private int sets;
     private int reps;
     private double weight;
-    private LocalDate date;
 
     public Exercise(int sets, int reps, double weight) {
         this.sets = sets;
@@ -33,20 +33,28 @@ public class Exercise {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Exercise exercise = (Exercise) o;
-        return Id == exercise.Id && sets == exercise.sets && reps == exercise.reps && Double.compare(weight, exercise.weight) == 0;
+        return id == exercise.id && sets == exercise.sets && reps == exercise.reps && Double.compare(weight, exercise.weight) == 0 && Objects.equals(date, exercise.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, sets, reps, weight);
+        return Objects.hash(id, date, sets, reps, weight);
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public int getSets() {
