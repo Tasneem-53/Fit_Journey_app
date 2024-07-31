@@ -42,6 +42,7 @@ int mReps = 0;
               updateDisplay();
            }
        });
+
     }
 
     private void updateDisplay (){

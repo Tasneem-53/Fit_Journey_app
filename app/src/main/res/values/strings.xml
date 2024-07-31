@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Fit Journey</string>
     <string name="exercise">Exercise</string>
     <string name="enter_an_exercise">Enter an exercise</string>
-    <string name="weight">weight</string>
-    <string name="Weight">Weight</string>
+    <string name="weight">Weight</string>
     <string name="enter_a_weight">Enter a weight</string>
     <string name="enter_reps">Enter reps</string>
     <string name="reps">Reps</string>
@@ -34,4 +34,24 @@
     <string name="change_password">Change Password</string>
     <string name="appHome">Home</string>
     <string name="change">Change</string>
+    <!-- Added strings -->
+    <string name="admin_page">Admin Page</string>
+    <string name="hello_adminname">Hello Admin</string>
+    <string name="delete_user">Delete User</string>
+    <string name="add_a_admin">Add Admin</string>
+    <string name="delete_a_user">Delete User</string>
+    <string name="add_a_admin_user">Add Admin User</string>
+    <string name="go_back_home">Go Back Home</string>
+    <string name="fit_journey">Fit Journey</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="new_user">New User</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="password">Password</string>
+    <string name="welcome_nfit_journey">Welcome to Fit Journey</string>
+    <string name="hello_user_admin">Hello User Admin</string>
+    <string name="meals">Meals</string>
+    <string name="exercise_s">Exercises</string>
+    <string name="admin">Admin</string>
 </resources>
