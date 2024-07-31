@@ -11,15 +11,20 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.daclink.fitjourney.Database.entities.Exercise;
+import com.daclink.fitjourney.Database.entities.Meals;
 import com.daclink.fitjourney.MainActivity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+@Database(entities = {Exercise.class, Meals.class}, version = 1, exportSchema = false)
 
 @Database(entities = {Exercise.class}, version = 1, exportSchema = false)
 public abstract class FitJourneyDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "FitJourney Database";
+    private static final String EXERCISE_TABLE = "exercise";
+
+
 
     public static final String EXERCISE_TABLE = "ExerciseTable";
 
@@ -53,7 +58,7 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
-            Log.i(MainActivity.TAG, "DATABASE CREATED!");
+            //Log.i(MainActivity.TAG, "DATABASE CREATED!");
             //TODO: add databaseWriteExecutor.execute(() -> {...}
         }
     };
