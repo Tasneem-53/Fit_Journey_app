@@ -20,12 +20,4 @@ public interface FitJourneyDAO {
     @Query("Select * from " + FitJourneyDatabase.EXERCISE_TABLE)
     ArrayList<Exercise> getAllRecords();
 
-    @Insert
-    void insert(User user);
-
-    @Query("SELECT * FROM User WHERE username = :username")
-    User getUserByUsername(String username);
-
-    @Query("SELECT * FROM User")
-    List<User> getAllUsers();
 }
