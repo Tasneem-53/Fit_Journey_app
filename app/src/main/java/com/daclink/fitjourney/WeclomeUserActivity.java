@@ -18,11 +18,22 @@ public class WeclomeUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weclome_user);
 
+        //meals button
         Button mealsButton = findViewById(R.id.meals_button);
         mealsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WeclomeUserActivity.this, MealsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //exercises button
+        Button exercisesButton = findViewById(R.id.exercises_button);
+        exercisesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WeclomeUserActivity.this, ExercisesActivity.class);
                 startActivity(intent);
             }
         });
