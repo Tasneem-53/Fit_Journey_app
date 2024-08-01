@@ -18,9 +18,12 @@ public interface MealsDAO {
     @Delete
     void delete(Meals meals);
 
-    @Query(" SELECT * FROM " + FitJourneyDatabase.MEALS_TABLE)
+    @Query("SELECT * FROM " + FitJourneyDatabase.MEALS_TABLE)
     List<Meals> getAllMeals();
 
-    @Query(" DELETE FROM " + FitJourneyDatabase.MEALS_TABLE)
+    @Query("SELECT * FROM " + FitJourneyDatabase.MEALS_TABLE + " ORDER BY date DESC")
+    List<Meals> getAllMealsOrderedByDate();
+
+    @Query("DELETE FROM " + FitJourneyDatabase.MEALS_TABLE)
     void deleteAll();
 }
