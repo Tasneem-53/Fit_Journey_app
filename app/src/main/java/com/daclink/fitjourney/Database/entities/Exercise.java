@@ -1,6 +1,5 @@
 package com.daclink.fitjourney.Database.entities;
 
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -11,42 +10,47 @@ import java.util.Objects;
 
 @Entity(tableName = FitJourneyDatabase.EXERCISE_TABLE)
 public class Exercise {
-
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-
+    private String name;
+    private double duration; // Duration in minutes
     private LocalDate date;
-    private int sets;
-    private int reps;
-    private double weight;
 
-    public Exercise(int sets, int reps, double weight) {
-        this.sets = sets;
-        this.reps = reps;
-        this.weight = weight;
-        this.date = LocalDate.now();
+    // Default constructor required by Room
+    public Exercise() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Exercise exercise = (Exercise) o;
-        return id == exercise.id && sets == exercise.sets && reps == exercise.reps && Double.compare(weight, exercise.weight) == 0 && Objects.equals(date, exercise.date);
+    // Parameterized constructor
+    public Exercise(String name, double duration, LocalDate date) {
+        this.name = name;
+        this.duration = duration;
+        this.date = date;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, date, sets, reps, weight);
-    }
-
+    // Getter and Setters
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
     }
 
     public LocalDate getDate() {
@@ -57,28 +61,16 @@ public class Exercise {
         this.date = date;
     }
 
-    public int getSets() {
-        return sets;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Exercise exercise = (Exercise) o;
+        return id == exercise.id && Double.compare(exercise.duration, duration) == 0 && name.equals(exercise.name);
     }
 
-    public void setSets(int sets) {
-        this.sets = sets;
-    }
-
-    public int getReps() {
-        return reps;
-    }
-
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, duration, date);
     }
 }
-
