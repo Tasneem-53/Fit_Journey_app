@@ -28,7 +28,7 @@
     <string name="current_password">Current Password</string>
     <string name="enter_current_password">Enter current password</string>
     <string name="new_password">New Password</string>
-    <string name="enter_new_password">Enter new password</string>
+    <string name="enter_new_password">Enter new password:</string>
     <string name="cancel">Cancel</string>
     <string name="change_password">Change Password</string>
     <string name="appHome">Home</string>
@@ -60,5 +60,5 @@
     <string name="submit">Submit</string>
     <string name="add_a_new_admin">Add a New Admin:</string>
     <string name="new_admin_hint">new admin hint</string>
-    <string name="add_new_password">Add New Password</string>
+    <string name="add_new_password">Add New Password:</string>
 </resources>
