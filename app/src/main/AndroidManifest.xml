@@ -22,7 +22,7 @@
             android:name=".MealsActivity"
             android:exported="false" />
         <activity
-            android:name=".AddUserAdmin"
+            android:name=".AddUserAdminActivity"
             android:exported="false" />
         <activity
             android:name=".DeleteUserAdminActivity"
