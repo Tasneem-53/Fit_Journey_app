@@ -18,7 +18,6 @@
     <string name="display_user">Display Users</string>
     <string name="new_admin">New Admin</string>
     <string name="new_admin_user">New Admin</string>
-    <string name="new_admin_pw">New Admin Password</string>
     <string name="new_admin_users">New Admin User</string>
     <string name="new_admin_password">New Admin Password</string>
     <string name="create_new_admin">Create New Admin</string>
@@ -54,4 +53,12 @@
     <string name="meals">Meals</string>
     <string name="exercise_s">Exercises</string>
     <string name="admin">Admin</string>
+    <string name="hello_user_name_or_hello_admin_name">Hello \'user + name\' or Hello \'Admin + name\'</string>
+    <string name="display_past_meals_here">Display past meals here</string>
+    <string name="enter_meal">Enter Meal</string>
+    <string name="enter_calories">Enter Calories</string>
+    <string name="submit">Submit</string>
+    <string name="add_a_new_admin">Add a New Admin:</string>
+    <string name="new_admin_hint">new admin hint</string>
+    <string name="add_new_password">Add New Password</string>
 </resources>

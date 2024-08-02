@@ -10,7 +10,7 @@
         android:id="@+id/meals_title_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Meals"
+        android:text="@string/meals"
         android:textSize="45sp"
         android:layout_marginTop="16dp"
         android:gravity="center"
@@ -31,7 +31,7 @@
             android:id="@+id/meals_display_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Display past meals here"
+            android:text="@string/display_past_meals_here"
             android:padding="16dp" />
     </ScrollView>
 
@@ -49,13 +49,16 @@
             android:id="@+id/meal_name_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Meal" />
+            android:autofillHints="enter meal"
+            android:hint="@string/enter_meal"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/meal_calories_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Calories"
+            android:autofillHints="enter calories"
+            android:hint="@string/enter_calories"
             android:inputType="number"
             android:layout_marginTop="8dp" />
 
@@ -76,16 +79,18 @@
             android:id="@+id/submit_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Submit"
+            android:text="@string/submit"
             android:layout_weight="1"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="8dp"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/home_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Home"
-            android:layout_weight="1" />
+            android:text="@string/home"
+            android:layout_weight="1"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
