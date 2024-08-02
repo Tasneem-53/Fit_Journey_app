@@ -23,7 +23,6 @@
     <string name="create_new_admin">Create New Admin</string>
     <string name="home">Home</string>
     <string name="settings">Settings</string>
-    <string name="s">User/Admin</string>
     <string name="user_admins">User/Admin</string>
     <string name="current_password">Current Password</string>
     <string name="enter_current_password">Enter current password</string>
@@ -67,4 +66,9 @@
     <string name="username_for_create_account">Username:</string>
     <string name="enter_an_admin_to_delete_at_delete_user_or_admin">enter an admin to delete</string>
     <string name="enter_a_user_or_admin_to_delete">enter a user or admin to delete</string>
+    <string name="exercises">Exercises</string>
+    <string name="display_past_exercises_here">Display past exercises here</string>
+    <string name="enter_exercise">Enter Exercise</string>
+    <string name="enter_duration_minutes">Enter Duration (minutes)</string>
+    <string name="progress">Process</string>
 </resources>

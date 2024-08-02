@@ -10,7 +10,7 @@
         android:id="@+id/exercises_title_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exercises"
+        android:text="@string/exercises"
         android:textSize="45sp"
         android:gravity="center"
         android:layout_marginTop="16dp"
@@ -31,7 +31,7 @@
             android:id="@+id/exercises_display_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Display past exercises here"
+            android:text="@string/display_past_exercises_here"
             android:padding="16dp" />
     </ScrollView>
 
@@ -49,13 +49,16 @@
             android:id="@+id/exercise_name_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Exercise" />
+            android:autofillHints="enter exercise"
+            android:hint="@string/enter_exercise"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/exercise_duration_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Duration (minutes)"
+            android:autofillHints="enter duration in minutes"
+            android:hint="@string/enter_duration_minutes"
             android:inputType="number"
             android:layout_marginTop="8dp" />
     </LinearLayout>
@@ -75,7 +78,7 @@
             android:id="@+id/submit_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Submit"
+            android:text="@string/submit"
             android:layout_weight="1"
             android:layout_marginEnd="8dp" />
 
@@ -83,7 +86,7 @@
             android:id="@+id/home_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Home"
+            android:text="@string/home"
             android:layout_weight="1" />
     </LinearLayout>
 
