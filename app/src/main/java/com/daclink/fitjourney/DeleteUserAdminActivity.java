@@ -8,8 +8,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.daclink.fitjourney.Database.FitJourneyRepository;
 import com.daclink.fitjourney.databinding.ActivityDeleteUserAdminBinding;
-import com.daclink.fitjourney.databinding.ActivityMainBinding;
-import com.daclink.fitjourney.databinding.ActivityMealsBinding;
 
 public class DeleteUserAdminActivity extends AppCompatActivity {
 
@@ -23,7 +21,8 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.userLogTextView.setMovementMethod(new ScrollingMovementMethod());
-        repository = new FitJourneyRepository(this);
+
+        repository = new FitJourneyRepository(getApplication());
 
         binding.userAdminDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,14 +38,29 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a User ID", Toast.LENGTH_SHORT).show();
             return;
         }
-        // Replace this with the actual delete logic from your repository
-        boolean result = repository.deleteUser(userId); // This method should be implemented in your repository
-
-        if (result) {
-            Toast.makeText(this, "User deleted successfully", Toast.LENGTH_SHORT).show();
-            binding.userLogTextView.append("User ID " + userId + " deleted\n");
-        } else {
-            Toast.makeText(this, "Failed to delete user", Toast.LENGTH_SHORT).show();
+        int username;
+        try {
+            username = Integer.parseInt(userId);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid User ID", Toast.LENGTH_SHORT).show();
+            return;
         }
+        repository.deleteUser(username, new FitJourneyRepository.RepositoryCallback() {
+            @Override
+            public void onComplete(final boolean success) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (success) {
+                            Toast.makeText(DeleteUserAdminActivity.this, "User deleted successfully", Toast.LENGTH_SHORT).show();
+                            binding.userLogTextView.append("User ID " + userId + " deleted\n");
+                        } else {
+                            Toast.makeText(DeleteUserAdminActivity.this, "Failed to delete user", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
     }
 }

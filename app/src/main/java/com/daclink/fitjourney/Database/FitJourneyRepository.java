@@ -7,15 +7,20 @@ import com.daclink.fitjourney.Database.entities.Exercise;
 import com.daclink.fitjourney.Database.entities.Meals;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class FitJourneyRepository {
     private MealsDAO mealsDAO;
     private ExerciseDAO exerciseDAO;
+    private UserDAO userDao;
 
     public FitJourneyRepository(Application application) {
         FitJourneyDatabase db = FitJourneyDatabase.getDatabase(application);
         this.mealsDAO = db.mealsDAO();
         this.exerciseDAO = db.exerciseDAO();
+        this.userDao = db.userDao();
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
     }
 
     public void insertMeal(Meals meal) {
@@ -54,5 +59,14 @@ public class FitJourneyRepository {
         });
     }
 
+    public void deleteUser(final int username, final RepositoryCallback callback) {
+        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+            int rowsDeleted = userDao.deleteUserByUsername(username);
+            callback.onComplete(rowsDeleted > 0);
+        });
+    }
 
+    public interface RepositoryCallback {
+        void onComplete(boolean success);
+    }
 }
