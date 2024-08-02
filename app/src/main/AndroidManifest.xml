@@ -23,7 +23,7 @@
             android:name=".AddUserAdmin"
             android:exported="false" />
         <activity
-            android:name=".Delete"
+            android:name=".DeleteUserAdminActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

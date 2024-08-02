@@ -61,4 +61,9 @@
     <string name="add_a_new_admin">Add a New Admin:</string>
     <string name="new_admin_hint">new admin hint</string>
     <string name="add_new_password">Add New Password:</string>
+    <string name="password_for_Create_Account">Password:</string>
+    <string name="enter_username_for_create_account">Enter Username</string>
+    <string name="create_account_for_create_account">Create Account</string>
+    <string name="username_for_create_account">Username:</string>
+    <string name="enter_an_admin_to_delete_at_delete_user_or_admin">enter an admin to delete</string>
 </resources>
