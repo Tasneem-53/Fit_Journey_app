@@ -59,7 +59,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="40dp"
         android:autofillHints="enter admin to delete"
-        android:hint="@string/enter_an_admin_to_delete_at_delete_user_or_admin"
+        android:hint="@string/enter_a_user_or_admin_to_delete"
         android:inputType="text"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"

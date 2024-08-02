@@ -66,4 +66,5 @@
     <string name="create_account_for_create_account">Create Account</string>
     <string name="username_for_create_account">Username:</string>
     <string name="enter_an_admin_to_delete_at_delete_user_or_admin">enter an admin to delete</string>
+    <string name="enter_a_user_or_admin_to_delete">enter a user or admin to delete</string>
 </resources>
