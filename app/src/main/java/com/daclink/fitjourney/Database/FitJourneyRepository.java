@@ -11,11 +11,13 @@ import java.util.List;
 public class FitJourneyRepository {
     private MealsDAO mealsDAO;
     private ExerciseDAO exerciseDAO;
+    private UserDAO userDAO;
 
     public FitJourneyRepository(Application application) {
         FitJourneyDatabase db = FitJourneyDatabase.getDatabase(application);
         this.mealsDAO = db.mealsDAO();
         this.exerciseDAO = db.exerciseDAO();
+        this.userDAO = db.userDAO();
     }
 
     public void insertMeal(Meals meal) {
@@ -54,5 +56,14 @@ public class FitJourneyRepository {
         });
     }
 
+    public void deleteUser(final int username, final RepositoryCallback callback) {
+        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+            int rowsDeleted = userDAO.deleteUserByUsername(username);
+            callback.onComplete(rowsDeleted > 0);
+        });
+    }
 
+    public interface RepositoryCallback {
+        void onComplete(boolean success);
+    }
 }
