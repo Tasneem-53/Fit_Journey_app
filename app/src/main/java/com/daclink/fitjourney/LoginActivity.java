@@ -41,6 +41,7 @@ private String mPassword;
                    userExist= verifyUserName(mUserName, mPassword);
                 }
                 System.out.println(userExist);
+                //its always allowing this to execute.... there is an error here
                 if(userExist == true){
                 Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
