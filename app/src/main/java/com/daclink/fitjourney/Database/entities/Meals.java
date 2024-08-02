@@ -8,23 +8,23 @@ import com.daclink.fitjourney.Database.FitJourneyDatabase;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity(tableName = FitJourneyDatabase.EXERCISE_TABLE)
-public class Exercise {
+@Entity(tableName = FitJourneyDatabase.MEALS_TABLE)
+public class Meals {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String name;
-    private double duration; // Duration in minutes
+    private String meal;
+    private double calories;
     private LocalDate date;
 
     // Default constructor required by Room
-    public Exercise() {
+    public Meals() {
     }
 
     // Parameterized constructor
-    public Exercise(String name, double duration, LocalDate date) {
-        this.name = name;
-        this.duration = duration;
+    public Meals(String meal, double calories, LocalDate date) {
+        this.meal = meal;
+        this.calories = calories;
         this.date = date;
     }
 
@@ -37,20 +37,20 @@ public class Exercise {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getMeal() {
+        return meal;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMeal(String meal) {
+        this.meal = meal;
     }
 
-    public double getDuration() {
-        return duration;
+    public double getCalories() {
+        return calories;
     }
 
-    public void setDuration(double duration) {
-        this.duration = duration;
+    public void setCalories(double calories) {
+        this.calories = calories;
     }
 
     public LocalDate getDate() {
@@ -65,12 +65,12 @@ public class Exercise {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Exercise exercise = (Exercise) o;
-        return id == exercise.id && Double.compare(exercise.duration, duration) == 0 && name.equals(exercise.name);
+        Meals meals = (Meals) o;
+        return id == meals.id && Double.compare(meals.calories, calories) == 0 && meal.equals(meals.meal);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, duration, date);
+        return Objects.hash(id, meal, calories, date);
     }
 }

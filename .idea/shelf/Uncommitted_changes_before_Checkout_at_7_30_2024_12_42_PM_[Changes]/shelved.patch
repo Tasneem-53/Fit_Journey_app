@@ -1,0 +1,118 @@
+Index: app/src/main/java/com/daclink/fitjourney/activity_create_account.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/daclink/fitjourney/activity_create_account.java b/app/src/main/java/com/daclink/fitjourney/activity_create_account.java
+new file mode 100644
+--- /dev/null	(date 1722368126000)
++++ b/app/src/main/java/com/daclink/fitjourney/activity_create_account.java	(date 1722368126000)
+@@ -0,0 +1,24 @@
++package com.daclink.fitjourney;
++
++import android.os.Bundle;
++
++import androidx.activity.EdgeToEdge;
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.core.graphics.Insets;
++import androidx.core.view.ViewCompat;
++import androidx.core.view.WindowInsetsCompat;
++
++public class activity_create_account extends AppCompatActivity {
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        EdgeToEdge.enable(this);
++        setContentView(R.layout.activity_create_account);
++        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
++            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
++            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
++            return insets;
++        });
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_create_account.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_create_account.xml b/app/src/main/res/layout/activity_create_account.xml
+new file mode 100644
+--- /dev/null	(date 1722368560000)
++++ b/app/src/main/res/layout/activity_create_account.xml	(date 1722368560000)
+@@ -0,0 +1,53 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <TextView
++        android:id="@+id/create_account_textView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Create Account"
++        android:textSize="45sp"
++        android:gravity="center"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent" />
++
++    <EditText
++        android:id="@+id/create_username_editText"
++        android:layout_width="0dp"
++        android:layout_height="wrap_content"
++        android:hint="Enter Username"
++        app:layout_constraintTop_toBottomOf="@+id/create_account_textView"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.5"
++        android:layout_marginTop="16dp" />
++
++    <EditText
++        android:id="@+id/create_password_editText"
++        android:layout_width="0dp"
++        android:layout_height="wrap_content"
++        android:hint="Enter Password"
++        android:inputType="textPassword"
++        app:layout_constraintTop_toBottomOf="@+id/create_username_editText"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.5"
++        android:layout_marginTop="16dp" />
++
++    <Button
++        android:id="@+id/create_account_button"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Create Account"
++        app:layout_constraintTop_toBottomOf="@+id/create_password_editText"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintHorizontal_bias="0.5"
++        android:layout_marginTop="24dp" />
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.FitJourney\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 6b6a05321b6bb27cb275e5999b474786ae8cea20)
++++ b/app/src/main/AndroidManifest.xml	(date 1722368126000)
+@@ -13,6 +13,9 @@
+         android:theme="@style/Theme.FitJourney"
+         tools:targetApi="31">
+         <activity
++            android:name=".activity_create_account"
++            android:exported="false" />
++        <activity
+             android:name=".MainActivity"
+             android:exported="true">
+             <intent-filter>
