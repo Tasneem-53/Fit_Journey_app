@@ -5,25 +5,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-public class WeclomeUserActivity extends AppCompatActivity {
+public class WelcomeUserActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weclome_user);
+        setContentView(R.layout.activity_welcome_user);
 
         //meals button
         Button mealsButton = findViewById(R.id.meals_button);
         mealsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WeclomeUserActivity.this, MealsActivity.class);
+                Intent intent = new Intent(WelcomeUserActivity.this, MealsActivity.class);
                 startActivity(intent);
             }
         });
@@ -33,7 +29,7 @@ public class WeclomeUserActivity extends AppCompatActivity {
         exercisesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WeclomeUserActivity.this, ExercisesActivity.class);
+                Intent intent = new Intent(WelcomeUserActivity.this, ExercisesActivity.class);
                 startActivity(intent);
             }
         });

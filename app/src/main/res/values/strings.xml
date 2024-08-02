@@ -70,6 +70,6 @@
     <string name="display_past_exercises_here">Display past exercises here</string>
     <string name="enter_exercise">Enter Exercise</string>
     <string name="enter_duration_minutes">Enter Duration (minutes)</string>
-    <string name="progress">Process</string>
+    <string name="progress">Progress</string>
     <string name="displays_progress_n_here">Displays Progress\n here!</string>
 </resources>
