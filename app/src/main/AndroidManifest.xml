@@ -34,8 +34,11 @@
             android:name=".ExercisesActivity"
             android:exported="false" />
         <activity
-            android:name=".WeclomeUserActivity"
-            android:exported="true" >
+            android:name=".WelcomeUserActivity"
+            android:exported="false" />
+
+        <activity android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
