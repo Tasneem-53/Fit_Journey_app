@@ -24,25 +24,27 @@ private String mPassword;
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean userExist = false;
+                //getting the edit text from username and password
+                mUserName = binding.usernameEditText.getText().toString();
+                mPassword = binding.passwordEditText.getText().toString();
+                if(!mUserName.isEmpty() && !mPassword.isEmpty()){
+                    userExist= verifyUserName(mUserName, mPassword);
+                }
+                System.out.println(userExist);
+                //its always allowing this to execute.... there is an error here
+                if(userExist == true){
                 Intent intent = new Intent(LoginActivity.this, WelcomeUserActivity.class);
 
                 startActivity(intent);
+                }
             }
         });
 
         binding.createNewAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean userExist = false;
-                //getting the edit text from username and password
-                mUserName = binding.usernameEditText.getText().toString();
-                mPassword = binding.passwordEditText.getText().toString();
-                if(!mUserName.isEmpty() && !mPassword.isEmpty()){
-                   userExist= verifyUserName(mUserName, mPassword);
-                }
-                System.out.println(userExist);
-                //its always allowing this to execute.... there is an error here
-                if(userExist == true){
+                {
                 Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
                 }
