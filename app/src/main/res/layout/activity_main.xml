@@ -30,19 +30,18 @@
         app:layout_constraintTop_toBottomOf="@+id/logDisplayTextView"
 
         />
-    
+
     <EditText
         android:id="@+id/exerciseInputEditText"
         android:layout_width="273dp"
         android:layout_height="39dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:autofillHints="enter an exercise"
+        android:hint="@string/enter_an_exercise"
         android:inputType="textAutoComplete"
         android:padding="8dp"
-        app:layout_constraintStart_toEndOf="@id/exerciseLabelTextView"
         app:layout_constraintBaseline_toBaselineOf="@id/exerciseLabelTextView"
-        android:hint="@string/enter_an_exercise"
-        />
+        app:layout_constraintStart_toEndOf="@id/exerciseLabelTextView" />
 
     <TextView
         android:layout_width="100dp"
@@ -61,6 +60,7 @@
         android:layout_height="39dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:autofillHints="enter a weight"
         android:inputType="number|numberDecimal"
         android:padding="8dp"
         app:layout_constraintBaseline_toBaselineOf="@id/weightLabelTextView"
@@ -85,6 +85,7 @@
         android:layout_height="39dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:autofillHints="enter reps"
         android:inputType="number"
         android:padding="8dp"
         app:layout_constraintBaseline_toBaselineOf="@id/repLabelTextView"
