@@ -14,10 +14,22 @@ public class User {
     private String username;
     private String password;
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    private boolean isAdmin;
+
+
     // Constructors
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        isAdmin = false;
     }
 
     // Getters and Setters
