@@ -1,5 +1,6 @@
 package com.daclink.fitjourney;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -30,6 +31,17 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
                 deleteUser();
             }
         });
+
+        binding.homeNav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DeleteUserAdminActivity.this, WelcomeUserActivity.class);
+                startActivity(intent);
+            }
+
+    });
+
+
     }
 
     private void deleteUser() {
