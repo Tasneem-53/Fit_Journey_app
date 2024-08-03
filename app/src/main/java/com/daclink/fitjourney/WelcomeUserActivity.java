@@ -33,5 +33,35 @@ public class WelcomeUserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //progress button
+        Button progressButton = findViewById(R.id.progress_button);
+        progressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeUserActivity.this, ProgressActivity.class);
+                startActivity(intent);
+            }
+        });
+        //Setting button
+        Button settingButton = findViewById(R.id.settings_button);
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeUserActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button adminButton = findViewById(R.id.admin_button);
+        adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeUserActivity.this, AdminPageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }

@@ -104,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/newPasswordTextView" />
 
     <Button
-        android:id="@+id/homeNav"
+        android:id="@+id/home_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
