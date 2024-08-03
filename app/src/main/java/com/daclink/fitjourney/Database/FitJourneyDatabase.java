@@ -61,6 +61,7 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE CREATED!");
+
             UserDAO dao = INSTANCE.userDAO();
             dao.deleteAll();
             User admin = new User("Admin1","admin1" );
@@ -69,6 +70,23 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
 
             User testUser1 = new User("testUser1", "testUser1");
             dao.insert(testUser1);        }
+=======
+            databaseWriteExecutor.execute(()-> {
+                UserDAO dao = INSTANCE.userDAO();
+                dao.deleteAll();
+                User admin = new User("Admin1","admin1" );
+                admin.setAdmin(true);
+                dao.insert(admin);
+
+                User testUser1 = new User("testUser1", "testUser1");
+                dao.insert(testUser1);
+
+            });
+
+
+
+        }
+
     };
 
     public abstract FitJourneyDAO fitJourneyDAO();

@@ -15,13 +15,30 @@ public class User {
     private String password;
 
 
+
     private boolean admin;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    private boolean isAdmin;
+
+
 
     // Constructors
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+ Updating_Activities_Valadez
         admin = false;
+
+        isAdmin = false;
+
     }
 
     // Getters and Setters
