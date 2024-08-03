@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Delete">
+    tools:context=".DeleteUserAdminActivity">
 
     <TextView
         android:id="@+id/addAdmin"
@@ -15,6 +15,7 @@
         android:padding="8dp"
         android:text="@string/add_admin"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.544"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,70 +32,81 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addAdmin" />
 
-    <TextView
+    <EditText
         android:id="@+id/newAdminLabelTextView"
-        android:layout_width="144dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/new_admin"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints="username"
+        android:gravity="center"
+        android:hint="@string/new_admin"
+        android:inputType="text"
         android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminUserLogTextView" />
 
-    <TextView
+    <EditText
         android:id="@+id/newAdminPasswordLabelTextView"
-        android:layout_width="189dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="56dp"
-        android:text="@string/new_admin_pw"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints="password"
+        android:gravity="center"
+        android:hint="@string/new_admin_password"
+        android:inputType="textPassword"
         android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newAdminLabelTextView" />
-
-    <Button
-        android:id="@+id/newAdminButton"
-        android:layout_width="144dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="56dp"
-        android:text="@string/new_admin_users"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/adminUserLogTextView" />
-
-    <Button
-        android:id="@+id/userAdminPasswordButton"
-        android:layout_width="144dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/new_admin_password"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.917"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/newAdminButton" />
 
     <Button
         android:id="@+id/createNewAdminButton"
         android:layout_width="144dp"
         android:layout_height="55dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="132dp"
+        android:layout_marginTop="24dp"
         android:text="@string/create_new_admin"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminUserLogTextView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newAdminPasswordLabelTextView" />
 
     <Button
         android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="160dp"
         android:text="@string/home"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createNewAdminButton" />
+
+    <TextView
+        android:id="@+id/addNewAdmintextView"
+        android:layout_width="140dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/add_a_new_admin"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/newAdminLabelTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminUserLogTextView" />
+
+    <TextView
+        android:id="@+id/addNewAdminPasswordTextView"
+        android:layout_width="140dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="44dp"
+        android:gravity="center"
+        android:text="@string/add_new_password"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/newAdminPasswordLabelTextView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNewAdmintextView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
