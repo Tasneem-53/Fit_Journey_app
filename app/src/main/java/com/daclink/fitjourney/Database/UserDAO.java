@@ -30,6 +30,9 @@ public interface UserDAO {
 
     @Query("SELECT * FROM " + FitJourneyDatabase.USER_TABLE)
     List<User> getAllUsers();
+
+    @Query(" DELETE FROM " + FitJourneyDatabase.USER_TABLE)
+    void deleteAll();
 }
 
 
