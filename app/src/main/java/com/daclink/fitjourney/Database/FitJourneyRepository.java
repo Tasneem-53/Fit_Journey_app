@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.daclink.fitjourney.Database.entities.Exercise;
 import com.daclink.fitjourney.Database.entities.Meals;
+import com.daclink.fitjourney.Database.entities.User;
 
 import java.util.List;
 
@@ -60,6 +61,13 @@ public class FitJourneyRepository {
         FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
             int rowsDeleted = userDAO.deleteUserByUsername(username);
             callback.onComplete(rowsDeleted > 0);
+        });
+    }
+
+    public void addUserAdmin(final User user, final RepositoryCallback callback) {
+        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+            userDAO.insert(user);
+            callback.onComplete(true);
         });
     }
 

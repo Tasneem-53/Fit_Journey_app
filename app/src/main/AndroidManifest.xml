@@ -12,9 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitJourney"
         tools:targetApi="31">
-        <activity
-            android:name=".CreateAccountActivity"
-            android:exported="false" />
+
         <activity
             android:name=".AddUserAdminActivity"
             android:exported="false" />
