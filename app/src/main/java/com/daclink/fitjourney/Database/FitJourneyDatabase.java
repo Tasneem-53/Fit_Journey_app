@@ -55,7 +55,6 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
                                     super.onCreate(db);
                                     Log.i(MainActivity.TAG, "DATABASE CREATED!");
                                     databaseWriteExecutor.execute(() -> {
-                                        // Use the passed context directly here
                                         UserDAO userDAO = getDatabase(context).userDAO();
                                         userDAO.deleteAll();
 
