@@ -22,9 +22,6 @@
             android:name=".AdminPageActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateAccountActivity"
-            android:exported="false" />
-        <activity
             android:name=".DeleteUserAdminActivity"
             android:exported="false" />
         <activity
