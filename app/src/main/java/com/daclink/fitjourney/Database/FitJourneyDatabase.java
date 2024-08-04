@@ -20,7 +20,7 @@ import com.daclink.fitjourney.MainActivity;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Exercise.class, Meals.class, User.class }, version = 4, exportSchema = false)
+@Database(entities = {Exercise.class, Meals.class, User.class }, version = 5, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class FitJourneyDatabase extends RoomDatabase {
 
@@ -35,7 +35,7 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
 
 
     private static volatile FitJourneyDatabase INSTANCE;
-    private static final int NUMBER_OF_THREADS = 5;
+    private static final int NUMBER_OF_THREADS = 6;
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
@@ -90,7 +90,7 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
             dao.insert(testUser1);        }
     };
 
-    public abstract FitJourneyDAO fitJourneyDAO();
+    //public abstract FitJourneyDAO fitJourneyDAO();
     public abstract MealsDAO mealsDAO();
     public abstract UserDAO userDAO();
     public abstract ExerciseDAO exerciseDAO();

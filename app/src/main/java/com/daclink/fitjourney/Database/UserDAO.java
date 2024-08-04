@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import java.util.List;
 import com.daclink.fitjourney.Database.entities.User;
+import com.daclink.fitjourney.MainActivity;
 
 @Dao
 public interface UserDAO {
