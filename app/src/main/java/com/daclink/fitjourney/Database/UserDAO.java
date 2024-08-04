@@ -27,7 +27,7 @@ public interface UserDAO {
     int deleteUserByUsername(int userId);
 
     @Query("SELECT * FROM User WHERE username = :username")
-    User getUserByUsername(String username);
+    User getUserByUserName(String username);
 
     @Query("SELECT * FROM " + FitJourneyDatabase.USER_TABLE)
     List<User> getAllUsers();

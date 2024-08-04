@@ -48,11 +48,25 @@ public class FitJourneyRepository {
         return null;
     }
 
-    public User getUserName(String userName) {
-       Log.i(MainActivity.TAG, "GETUSERNAME " + userName);
-        return userDAO.getUserByUsername(userName);
 
+    public User getUserName(String username) {
+        Log.i(MainActivity.TAG, "GETUSERNAME " + username);
+        Future<User> future = FitJourneyDatabase.databaseWriteExecutor.submit(
+                new Callable<User>() {
+                    @Override
+                    public User call() throws Exception {
+                        return userDAO.getUserByUserName(username);
+                    }
+                });
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e){
+            Log.i(MainActivity.TAG, "Problem when getting user by username in Repository");
+        }
+        return null;
     }
+
+
 
     public void insertMeal(Meals meal) {
         FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
