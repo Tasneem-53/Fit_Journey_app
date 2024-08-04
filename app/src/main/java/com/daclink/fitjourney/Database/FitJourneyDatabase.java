@@ -49,7 +49,26 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
                                         DATABASE_NAME
                             )
                             .fallbackToDestructiveMigration()
-                            .addCallback(addDefaultValues)
+                            .addCallback(new RoomDatabase.Callback() {
+                                @Override
+                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                                    super.onCreate(db);
+                                    Log.i(MainActivity.TAG, "DATABASE CREATED!");
+                                    databaseWriteExecutor.execute(() -> {
+                                        // Use the passed context directly here
+                                        UserDAO userDAO = getDatabase(context).userDAO();
+                                        userDAO.deleteAll();
+
+                                        User admin = new User("Admin1", "admin1");
+                                        admin.setAdmin(true);
+                                        userDAO.insert(admin);
+
+                                        User testUser1 = new User("testUser1", "testUser1");
+                                        userDAO.insert(testUser1);
+                                    });
+                                }
+                            })
+
                             .build();
                 }
             }
