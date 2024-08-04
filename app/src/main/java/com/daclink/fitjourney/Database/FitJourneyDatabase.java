@@ -20,11 +20,11 @@ import com.daclink.fitjourney.MainActivity;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Exercise.class, Meals.class, User.class }, version = 3, exportSchema = false)
+@Database(entities = {Exercise.class, Meals.class, User.class }, version = 4, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class FitJourneyDatabase extends RoomDatabase {
 
-    public static final String DATABASE_NAME = "FitJourney Database";
+    public static final String DATABASE_NAME = "FitJourneyDatabase";
 
     public static final String EXERCISE_TABLE = "Exercise";
 
