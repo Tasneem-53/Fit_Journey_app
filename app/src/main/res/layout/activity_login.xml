@@ -37,11 +37,11 @@
         android:id="@+id/login_button"
         android:layout_width="120dp"
         android:layout_height="65dp"
-        android:layout_marginBottom="272dp"
+        android:layout_marginBottom="320dp"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toEndOf="@+id/createNewAccount_button" />
 
     <Button
