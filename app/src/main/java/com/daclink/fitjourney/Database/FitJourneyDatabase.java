@@ -1,3 +1,4 @@
+//Database updates.
 package com.daclink.fitjourney.Database;
 
 
@@ -34,7 +35,7 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
 
 
     private static volatile FitJourneyDatabase INSTANCE;
-    private static final int NUMBER_OF_THREADS = 4;
+    private static final int NUMBER_OF_THREADS = 5;
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
@@ -48,7 +49,25 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
                                         DATABASE_NAME
                             )
                             .fallbackToDestructiveMigration()
-                            .addCallback(addDefaultValues)
+                            .addCallback(new RoomDatabase.Callback() {
+                                @Override
+                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                                    super.onCreate(db);
+                                    Log.i(MainActivity.TAG, "DATABASE CREATED!");
+                                    databaseWriteExecutor.execute(() -> {
+                                        UserDAO userDAO = getDatabase(context).userDAO();
+                                        userDAO.deleteAll();
+
+                                        User admin = new User("Admin1", "admin1");
+                                        admin.setAdmin(true);
+                                        userDAO.insert(admin);
+
+                                        User testUser1 = new User("testUser1", "testUser1");
+                                        userDAO.insert(testUser1);
+                                    });
+                                }
+                            })
+
                             .build();
                 }
             }
@@ -61,8 +80,14 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE CREATED!");
-            //TODO: add databaseWriteExecutor.execute(() -> {...}
-        }
+            UserDAO dao = INSTANCE.userDAO();
+            dao.deleteAll();
+            User admin = new User("Admin1","admin1" );
+            admin.setAdmin(true);
+            dao.insert(admin);
+
+            User testUser1 = new User("testUser1", "testUser1");
+            dao.insert(testUser1);        }
     };
 
     public abstract FitJourneyDAO fitJourneyDAO();

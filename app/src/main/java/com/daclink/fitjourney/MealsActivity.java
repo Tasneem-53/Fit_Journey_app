@@ -27,7 +27,7 @@ public class MealsActivity extends AppCompatActivity {
 
         binding.homeButton.setOnClickListener(v -> {
             finish(); // This will close the MealsActivity and go back to MainActivity
-        });
+       });
 
         binding.submitButton.setOnClickListener(v -> {
             handleSubmit();
