@@ -9,15 +9,19 @@ import com.daclink.fitjourney.Database.entities.Meals;
 import com.daclink.fitjourney.Database.entities.User;
 import com.daclink.fitjourney.MainActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class FitJourneyRepository {
-    private MealsDAO mealsDAO;
-    private ExerciseDAO exerciseDAO;
-    private UserDAO userDAO;
+    private final MealsDAO mealsDAO;
+    private final ExerciseDAO exerciseDAO;
+    private final UserDAO userDAO;
+
+
+
 
     private static FitJourneyRepository repository;
 
@@ -26,6 +30,11 @@ public class FitJourneyRepository {
         this.mealsDAO = db.mealsDAO();
         this.exerciseDAO = db.exerciseDAO();
         this.userDAO = db.userDAO();
+        this.exerciseDAO.getAllExercises();
+        this.mealsDAO.getAllMeals();
+
+
+
     }
 
     public static FitJourneyRepository getRepository(Application application){
