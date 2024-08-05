@@ -5,15 +5,14 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.daclink.fitjourney.Database.FitJourneyRepository;
 import com.daclink.fitjourney.Database.entities.User;
 import com.daclink.fitjourney.databinding.ActivityAddUserAdminBinding;
+import com.daclink.fitjourney.databinding.ActivityDeleteUserAdminBinding;
+
 
 public class AddUserAdminActivity extends AppCompatActivity {
 
@@ -27,6 +26,7 @@ public class AddUserAdminActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.adminUserLogTextView.setMovementMethod(new ScrollingMovementMethod());
+
         repository = new FitJourneyRepository(getApplication());
 
         binding.createNewAdminButton.setOnClickListener(new View.OnClickListener() {
@@ -67,4 +67,5 @@ public class AddUserAdminActivity extends AppCompatActivity {
             }
         });
     }
+
 }

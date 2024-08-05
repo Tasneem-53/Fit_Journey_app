@@ -71,7 +71,6 @@ public class FitJourneyRepository {
         });
     }
 
-
     public interface RepositoryCallback {
         void onComplete(boolean success);
     }
