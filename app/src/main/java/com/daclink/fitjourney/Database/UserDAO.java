@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import java.util.List;
 import com.daclink.fitjourney.Database.entities.User;
+import com.daclink.fitjourney.MainActivity;
 
 @Dao
 public interface UserDAO {
@@ -26,7 +27,7 @@ public interface UserDAO {
     int deleteUserByUsername(int userId);
 
     @Query("SELECT * FROM User WHERE username = :username")
-    User getUserByUsername(String username);
+    User getUserByUserName(String username);
 
     @Query("SELECT * FROM " + FitJourneyDatabase.USER_TABLE)
     List<User> getAllUsers();
