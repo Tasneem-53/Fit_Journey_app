@@ -28,7 +28,7 @@
             android:name=".ExercisesActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".WelcomeUserActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,7 +49,7 @@
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeUserActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
     </application>
 

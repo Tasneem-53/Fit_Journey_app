@@ -71,6 +71,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(mPassword.equals(user.getPassword())){
                     Toast.makeText(LoginActivity.this, "Password is correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Both username and password are correct " + user.getUsername() + " and " + user.getPassword(), Toast.LENGTH_SHORT).show();
+
                     startActivity(WelcomeUserActivity.welcomeIntentFactory(getApplicationContext(), user.getId()));
                 }else{
                     Toast.makeText(LoginActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
