@@ -131,6 +131,11 @@ public class FitJourneyRepository {
         return userDAO.getUserByUserId(userId);
     }
 
+    public void insertNewUser(User user) {
+        new Thread(() -> userDAO.insert(user)).start();
+    }
+
+
 
 
 }
