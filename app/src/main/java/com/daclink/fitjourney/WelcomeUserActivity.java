@@ -150,12 +150,25 @@ public class WelcomeUserActivity extends AppCompatActivity {
         }
 
         private void showLogoutDialog() {
-            new AlertDialog.Builder(this)
-                    .setMessage("\t\t Logout of Fit Journey?")
-                    .setPositiveButton("Logout", (dialog, which) -> logout())
-                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-                    .create()
-                    .show();
+         
+            AlertDialog.Builder alterBuilder = new AlertDialog.Builder(WelcomeUserActivity.this);
+            final AlertDialog alertDialog = alterBuilder.create();
+
+            alterBuilder.setMessage("\t\tYou want to Logout? ");
+
+            alterBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    logout();
+                }
+            });
+            alterBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    alertDialog.dismiss();
+                }
+            });
+            alterBuilder.create().show();
         }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
