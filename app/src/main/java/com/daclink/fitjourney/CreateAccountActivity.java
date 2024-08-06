@@ -27,12 +27,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         repository = FitJourneyRepository.getRepository(getApplication());
 
-        binding.createAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createAccount();  // Trigger account creation
-                Toast.makeText(CreateAccountActivity.this, "ERROR USER ALREADY EXIST!!!!!!!!!!!!!!!. ", Toast.LENGTH_SHORT).show();  // Moved Toast to observer
-            }
+        binding.createAccountButton.setOnClickListener(v -> {
+            createAccount();  // Trigger account creation
+            Toast.makeText(CreateAccountActivity.this, "ERROR USER ALREADY EXIST!!!!!!!!!!!!!!!. ", Toast.LENGTH_SHORT).show();  // Moved Toast to observer
         });
     }
 
@@ -53,8 +50,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 Toast.makeText(CreateAccountActivity.this, "Success! New user created! Login: " + newUser.getUsername(), Toast.LENGTH_SHORT).show();
                 startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
 
-            } else {
-                Toast.makeText(CreateAccountActivity.this, "ERROR User already exists! Please try to log in again.", Toast.LENGTH_SHORT).show();
             }
         });
     }
