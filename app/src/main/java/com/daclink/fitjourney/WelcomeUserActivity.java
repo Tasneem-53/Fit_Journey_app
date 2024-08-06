@@ -44,10 +44,10 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
             if (loggedInUserId == LOGGED_OUT) {
                 startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
-
             }
 
             updateSharedPreference();
+
             getButtons();
         }
 
@@ -119,6 +119,13 @@ public class WelcomeUserActivity extends AppCompatActivity {
             userObserver.observe(this, user -> {
                 this.user = user;
                 if (this.user != null) {
+                    if (user.getAdmin()) {
+                        binding.displayAdminNameTextView.setText(String.format("Welcome Administrator %s", user.getUsername()));
+                    } else {
+                        binding.displayAdminNameTextView.setText(String.format("Welcome %s", user.getUsername()));
+                    }
+
+
                     invalidateOptionsMenu();
                 }
             });
@@ -150,7 +157,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
         }
 
         private void showLogoutDialog() {
-         
+
             AlertDialog.Builder alterBuilder = new AlertDialog.Builder(WelcomeUserActivity.this);
             final AlertDialog alertDialog = alterBuilder.create();
 
