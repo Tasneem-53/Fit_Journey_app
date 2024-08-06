@@ -1,5 +1,6 @@
 package com.daclink.fitjourney.Database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -34,6 +35,15 @@ public interface UserDAO {
 
     @Query(" DELETE FROM " + FitJourneyDatabase.USER_TABLE)
     void deleteAll();
+
+    //we have a static reference to our database table
+    //what is defined in out database.java
+    @Query(" SELECT * FROM " + FitJourneyDatabase.USER_TABLE + " WHERE username == :username")
+    LiveData<User> getUser(String username);
+
+    @Query(" SELECT * FROM " + FitJourneyDatabase.USER_TABLE + " WHERE id == :userId")
+    LiveData<User> getUserByUserId(int userId);
+
 }
 
 

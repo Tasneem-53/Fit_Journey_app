@@ -4,6 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 
+import androidx.lifecycle.LiveData;
+
 import com.daclink.fitjourney.Database.entities.Exercise;
 import com.daclink.fitjourney.Database.entities.Meals;
 import com.daclink.fitjourney.Database.entities.User;
@@ -21,8 +23,6 @@ public class FitJourneyRepository {
     private final UserDAO userDAO;
 
 
-
-
     private static FitJourneyRepository repository;
 
     public FitJourneyRepository(Application application) {
@@ -34,29 +34,32 @@ public class FitJourneyRepository {
         this.mealsDAO.getAllMeals();
 
 
-
     }
 
-    public static FitJourneyRepository getRepository(Application application){
-        if(repository !=null){
+    public static FitJourneyRepository getRepository(Application application) {
+        if (repository != null) {
             return repository;
         }
         Future<FitJourneyRepository> future = FitJourneyDatabase.databaseWriteExecutor.submit(
                 new Callable<FitJourneyRepository>() {
                     @Override
                     public FitJourneyRepository call() throws Exception {
-                        return  new FitJourneyRepository(application);
+                        return new FitJourneyRepository(application);
                     }
                 }
         );
         try {
             return future.get();
-        }catch (InterruptedException | ExecutionException e){
+        } catch (InterruptedException | ExecutionException e) {
             Log.d(MainActivity.TAG, "Problem getting GymLogRepository, thread error");
         }
         return null;
     }
 
+    public LiveData<User> getUserByUsername(String username) {
+        Log.i(MainActivity.TAG, "GETUSERNAME " + username);
+        return userDAO.getUser(username);
+    }
 
     public User getUserName(String username) {
         Log.i(MainActivity.TAG, "GETUSERNAME " + username);
@@ -69,12 +72,11 @@ public class FitJourneyRepository {
                 });
         try {
             return future.get();
-        } catch (InterruptedException | ExecutionException e){
+        } catch (InterruptedException | ExecutionException e) {
             Log.i(MainActivity.TAG, "Problem when getting user by username in Repository");
         }
         return null;
     }
-
 
 
     public void insertMeal(Meals meal) {
@@ -124,6 +126,12 @@ public class FitJourneyRepository {
         void onComplete(boolean success);
     }
 
+    public LiveData<User> getUserByUserId(int userId) {
+        Log.i(MainActivity.TAG, "Get user by Id " + userId);
+        return userDAO.getUserByUserId(userId);
+    }
+
 
 
 }
+

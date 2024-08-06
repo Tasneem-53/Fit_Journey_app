@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.daclink.fitjourney.Database.FitJourneyRepository;
 import com.daclink.fitjourney.Database.UserDAO;
@@ -17,28 +18,83 @@ import com.daclink.fitjourney.databinding.ActivityLoginBinding;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
-private ActivityLoginBinding binding;
-private FitJourneyRepository repository;
-private String mUserName;
-private String mPassword;
-UserDAO userDAO;
+    private ActivityLoginBinding binding;
+    private FitJourneyRepository repository;
+    private String mUserName;
+    private String mPassword;
+    UserDAO userDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        repository =  FitJourneyRepository.getRepository(getApplication());
-        binding.loginButton.setOnClickListener(new View.OnClickListener() {
 
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+
+        setContentView(binding.getRoot());
+
+        repository = FitJourneyRepository.getRepository(getApplication());
+
+        binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean userExist = false;
-                //getting the edit text from username and password
-                mUserName = binding.usernameEditText.getText().toString();
-                mPassword = binding.passwordEditText.getText().toString();
+                verifyUser();
+            }
+        });
 
-                try {
+        binding.createNewAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                {
+                    Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+    }
+    private void verifyUser() {
+        boolean userExist = false;
+        //getting the edit text from username and password
+        mUserName = binding.usernameEditText.getText().toString();
+        mPassword = binding.passwordEditText.getText().toString();
+
+        if(mUserName.isEmpty()){
+            Toast.makeText(LoginActivity.this, "User name can not be blank", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        LiveData<User> userObserver = repository.getUserByUsername(mUserName);
+        //this is going to watch that object for updates
+        //Hey database find this user it and this will wait for it to come back
+        userObserver.observe(this,user -> {
+            if(user != null){
+                Toast.makeText(LoginActivity.this, "Inside user user is not null", Toast.LENGTH_SHORT).show();
+
+                if(mPassword.equals(user.getPassword())){
+                    Toast.makeText(LoginActivity.this, "Password is correct", Toast.LENGTH_SHORT).show();
+                    startActivity(WelcomeUserActivity.welcomeIntentFactory(getApplicationContext(), user.getId()));
+                }else{
+                    Toast.makeText(LoginActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
+                }
+
+            }else{
+                Toast.makeText(LoginActivity.this, "No user named found: " + mUserName, Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+    }
+
+
+    //Intent factory for LoginActivity
+    static Intent loginIntentFactory(Context context) {
+        return new Intent(context, LoginActivity.class);
+
+
+    }
+}
+    /*
+      try {
                     if (verifyUserName(mUserName, mPassword)) {
                         Intent intent = new Intent(LoginActivity.this, WelcomeUserActivity.class);
                         startActivity(intent);
@@ -49,20 +105,9 @@ UserDAO userDAO;
                     Log.e(MainActivity.TAG, "Error verifying username 49", e);
                     Toast.makeText(LoginActivity.this, "Verification error 50", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
 
-        binding.createNewAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                {
-                Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
-                startActivity(intent);
-                }
-            }
-        });
 
-    }
+
     //todo finish writing this method
     //this method will check with the database to see if user name exist
     private boolean verifyUserName(String userName, String password) {
@@ -79,3 +124,5 @@ UserDAO userDAO;
         return new Intent(context, LoginActivity.class);
     }
 }
+
+     */
