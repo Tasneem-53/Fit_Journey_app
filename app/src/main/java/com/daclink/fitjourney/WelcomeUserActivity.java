@@ -19,6 +19,8 @@ import androidx.lifecycle.LiveData;
 
 import com.daclink.fitjourney.Database.FitJourneyRepository;
 import com.daclink.fitjourney.Database.entities.User;
+import com.daclink.fitjourney.databinding.ActivityLoginBinding;
+import com.daclink.fitjourney.databinding.ActivityWelcomeUserBinding;
 
 public class WelcomeUserActivity extends AppCompatActivity {
         private static final String WELCOME_USER_ACTIVITY_USER_ID = "com.daclink.fitjourney.MAIN_ACTIVITY_USER_ID";
@@ -29,23 +31,24 @@ public class WelcomeUserActivity extends AppCompatActivity {
         private FitJourneyRepository repository;
         private User user;
         private int loggedInUserId = LOGGED_OUT;
+        private ActivityWelcomeUserBinding binding;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_welcome_user);
+            binding = ActivityWelcomeUserBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
 
             repository = FitJourneyRepository.getRepository(getApplication());
             loginUser(savedInstanceState);
 
             if (loggedInUserId == LOGGED_OUT) {
                 startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
-                finish();
-                return;
+
             }
 
             updateSharedPreference();
-            setupButtons();
+            getButtons();
         }
 
         private void updateSharedPreference() {
@@ -56,8 +59,35 @@ public class WelcomeUserActivity extends AppCompatActivity {
             editor.apply();
         }
 
-        private void setupButtons() {
+        private void getButtons() {
+            binding.mealsButton.setOnClickListener(v -> {
+                Intent intent = new Intent(WelcomeUserActivity.this, MealsActivity.class);
+                startActivity(intent);
+            });
+
+            binding.exercisesButton.setOnClickListener(v -> {
+                Intent intent = new Intent(WelcomeUserActivity.this, ExercisesActivity.class);
+                startActivity(intent);
+            });
+
+            binding.progressButton.setOnClickListener(v -> {
+                Intent intent = new Intent(WelcomeUserActivity.this, ProgressActivity.class);
+                startActivity(intent);
+            });
+
+
+            binding.settingsButton.setOnClickListener(v -> {
+                Intent intent = new Intent(WelcomeUserActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            });
+
+            binding.adminButton.setOnClickListener(v -> {
+                Intent intent = new Intent(WelcomeUserActivity.this, AdminPageActivity.class);
+                startActivity(intent);
+            });
         }
+
+
 
         static Intent welcomeIntentFactory(Context context) {
             return new Intent(context, WelcomeUserActivity.class);
