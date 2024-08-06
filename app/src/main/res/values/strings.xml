@@ -74,5 +74,6 @@
     <string name="displays_progress_n_here">Displays Progress\n here!</string>
     <string name="preference_file_key">techOttersSolutionsPreferenceFileFitJourney</string>
     <string name="preference_userId_key">techOtterSolutionsUserIdKeyFitJourney</string>
+    <string name="Cancel">Cancel</string>
 
 </resources>
