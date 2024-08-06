@@ -1,5 +1,6 @@
 package com.daclink.fitjourney.Database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -9,7 +10,6 @@ import androidx.room.Update;
 
 import java.util.List;
 import com.daclink.fitjourney.Database.entities.User;
-import com.daclink.fitjourney.MainActivity;
 
 @Dao
 public interface UserDAO {
@@ -23,8 +23,14 @@ public interface UserDAO {
     @Delete
     void delete(User user);
 
-    @Query("DELETE FROM User WHERE username = :userId")
-    int deleteUserByUsername(int userId);
+    @Query("SELECT * FROM User WHERE id = :userId")
+    User getUserByUserId(int userId);
+
+    @Query("DELETE FROM User WHERE id = :userId")
+    int deleteUserByUserId(int userId);
+
+    @Query("SELECT * FROM User WHERE username = :username AND password = :password")
+    User getUserByUsernameAndPassword(String username, String password);
 
     @Query("SELECT * FROM User WHERE username = :username")
     User getUserByUserName(String username);
@@ -34,6 +40,12 @@ public interface UserDAO {
 
     @Query(" DELETE FROM " + FitJourneyDatabase.USER_TABLE)
     void deleteAll();
+
+    @Query("SELECT * FROM User WHERE username = :username")
+    LiveData<User> getUserByUsername(String username);
+
+    @Query("UPDATE User SET password = :password WHERE username = :username")
+    void updatePassword(String username, String password);
 }
 
 

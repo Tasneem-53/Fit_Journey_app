@@ -4,12 +4,13 @@ import android.app.Application;
 import android.util.Log;
 
 
+import androidx.lifecycle.LiveData;
+
 import com.daclink.fitjourney.Database.entities.Exercise;
 import com.daclink.fitjourney.Database.entities.Meals;
 import com.daclink.fitjourney.Database.entities.User;
 import com.daclink.fitjourney.MainActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -115,15 +116,32 @@ public class FitJourneyRepository {
 
     public void deleteUser(final int username, final RepositoryCallback callback) {
         FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
-            int rowsDeleted = userDAO.deleteUserByUsername(username);
+            int rowsDeleted = userDAO.deleteUserByUserId(username);
             callback.onComplete(rowsDeleted > 0);
         });
     }
 
-    public interface RepositoryCallback {
-        void onComplete(boolean success);
+    // Get a user by username
+    public LiveData<User> getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
+    }
+
+    // Update user password
+    public void updateUser(User user) {
+        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+            userDAO.update(user);
+        });
+    }
+
+    // Update password by username
+    public void updatePassword(String username, String newPassword) {
+        FitJourneyDatabase.databaseWriteExecutor.execute(() -> userDAO.updatePassword(username, newPassword));
     }
 
 
+
+    public interface RepositoryCallback {
+        void onComplete(boolean success);
+    }
 
 }
