@@ -60,28 +60,28 @@ public class WelcomeUserActivity extends AppCompatActivity {
         }
 
         private void getButtons() {
-            binding.mealsButton.setOnClickListener(v -> {
+            binding.mealsButton.setOnClickListener(view -> {
                 Intent intent = new Intent(WelcomeUserActivity.this, MealsActivity.class);
                 startActivity(intent);
             });
 
-            binding.exercisesButton.setOnClickListener(v -> {
+            binding.exercisesButton.setOnClickListener(view -> {
                 Intent intent = new Intent(WelcomeUserActivity.this, ExercisesActivity.class);
                 startActivity(intent);
             });
 
-            binding.progressButton.setOnClickListener(v -> {
+            binding.progressButton.setOnClickListener(view -> {
                 Intent intent = new Intent(WelcomeUserActivity.this, ProgressActivity.class);
                 startActivity(intent);
             });
 
 
-            binding.settingsButton.setOnClickListener(v -> {
+            binding.settingsButton.setOnClickListener(view -> {
                 Intent intent = new Intent(WelcomeUserActivity.this, SettingsActivity.class);
                 startActivity(intent);
             });
 
-            binding.adminButton.setOnClickListener(v -> {
+            binding.adminButton.setOnClickListener(view -> {
                 Intent intent = new Intent(WelcomeUserActivity.this, AdminPageActivity.class);
                 startActivity(intent);
             });
@@ -120,8 +120,10 @@ public class WelcomeUserActivity extends AppCompatActivity {
                 this.user = user;
                 if (this.user != null) {
                     if (user.getAdmin()) {
+                        binding.adminButton.setVisibility(View.VISIBLE);
                         binding.displayAdminNameTextView.setText(String.format("Welcome Administrator %s", user.getUsername()));
                     } else {
+                        binding.adminButton.setVisibility(View.GONE);
                         binding.displayAdminNameTextView.setText(String.format("Welcome %s", user.getUsername()));
                     }
 
