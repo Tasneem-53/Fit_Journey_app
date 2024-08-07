@@ -35,8 +35,7 @@ public class ProgressActivity extends AppCompatActivity {
         });
 
         binding.homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(ProgressActivity.this, WelcomeUserActivity.class);
-            startActivity(intent);
+            startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext()));
         });
     }
 

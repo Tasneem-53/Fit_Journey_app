@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 {
-                    startActivity(CreateAccountActivity.createAccountIntentFactory(getApplicationContext()));
+                    startActivity(IntentFactory.createAccountIntentFactory(getApplicationContext()));
                 }
             }
         });
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         userObserver.observe(this,user -> {
             if(user != null){
                 if(mPassword.equals(user.getPassword())){
-                    startActivity(WelcomeUserActivity.welcomeIntentFactory(getApplicationContext(), user.getId()));
+                    startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext(), user.getId()));
                 }else{
                     Toast.makeText(LoginActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
                 }
@@ -77,10 +77,4 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    //Intent factory for LoginActivity
-    static Intent loginIntentFactory(Context context) {
-        return new Intent(context, LoginActivity.class);
-
-
-    }
 }

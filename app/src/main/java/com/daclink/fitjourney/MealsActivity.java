@@ -38,7 +38,7 @@ public class MealsActivity extends AppCompatActivity {
         });
 
         binding.homeButton.setOnClickListener(v -> {
-            finish(); // Close the MealsActivity
+            startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext()));
         });
 
         binding.submitButton.setOnClickListener(v -> {

@@ -38,7 +38,7 @@ public class ExercisesActivity extends AppCompatActivity {
         });
 
         binding.homeButton.setOnClickListener(v -> {
-            finish(); // Close the ExercisesActivity
+           startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext()));
         });
 
         binding.submitButton.setOnClickListener(v -> {
