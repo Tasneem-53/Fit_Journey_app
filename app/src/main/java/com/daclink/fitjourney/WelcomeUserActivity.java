@@ -24,7 +24,6 @@ import com.daclink.fitjourney.databinding.ActivityWelcomeUserBinding;
 
 public class WelcomeUserActivity extends AppCompatActivity {
         static final String WELCOME_USER_ACTIVITY_USER_ID = "com.daclink.fitjourney.MAIN_ACTIVITY_USER_ID";
-        private static final String SHARED_PREFERENCE_USERID_KEY = "com.daclink.fitjourney.SHARED_PREFENCE_USERID_KEY";
         private static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.daclink.fitjourney.SAVED_INSTANCE_STATE_USERID_KEY";
         private static final int LOGGED_OUT = -1;
         private static final String TAG = "AV_GYMLOG";
@@ -43,7 +42,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
             loginUser(savedInstanceState);
 
             if (loggedInUserId == LOGGED_OUT) {
-                startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
+                startActivity(IntentFactory.loginIntentFactory(getApplicationContext()));
             }
 
             updateSharedPreference();
@@ -61,29 +60,24 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
         private void getButtons() {
             binding.mealsButton.setOnClickListener(view -> {
-                Intent intent = new Intent(WelcomeUserActivity.this, MealsActivity.class);
-                startActivity(intent);
+                startActivity(IntentFactory.mealsIntentFactory(getApplicationContext()));
             });
 
             binding.exercisesButton.setOnClickListener(view -> {
-                Intent intent = new Intent(WelcomeUserActivity.this, ExercisesActivity.class);
-                startActivity(intent);
+                startActivity(IntentFactory.exercisesIntentFactory(getApplicationContext()));
             });
 
             binding.progressButton.setOnClickListener(view -> {
-                Intent intent = new Intent(WelcomeUserActivity.this, ProgressActivity.class);
-                startActivity(intent);
+                startActivity(IntentFactory.progressIntentFactory(getApplicationContext()));
             });
 
 
             binding.settingsButton.setOnClickListener(view -> {
-                Intent intent = new Intent(WelcomeUserActivity.this, SettingsActivity.class);
-                startActivity(intent);
+                startActivity(IntentFactory.settingsIntentFactory(getApplicationContext()));
             });
 
             binding.adminButton.setOnClickListener(view -> {
-                Intent intent = new Intent(WelcomeUserActivity.this, AdminPageActivity.class);
-                startActivity(intent);
+                startActivity(IntentFactory.loginIntentFactory(getApplicationContext()));
             });
         }
 
@@ -127,7 +121,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
             loggedInUserId = LOGGED_OUT;
             updateSharedPreference();
             getIntent().putExtra(WELCOME_USER_ACTIVITY_USER_ID, LOGGED_OUT);
-            startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
+            startActivity(IntentFactory.loginIntentFactory(getApplicationContext()));
             finish();
         }
 
@@ -182,15 +176,6 @@ public class WelcomeUserActivity extends AppCompatActivity {
             updateSharedPreference();
         }
 
-    static Intent welcomeIntentFactory(Context context) {
-        return new Intent(context, WelcomeUserActivity.class);
-    }
-
-    static Intent welcomeIntentFactory(Context context, int userId) {
-        Intent intent = new Intent(context, WelcomeUserActivity.class);
-        intent.putExtra(WELCOME_USER_ACTIVITY_USER_ID, userId);
-        return intent;
-    }
 
 
 
