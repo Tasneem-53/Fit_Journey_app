@@ -16,6 +16,7 @@ public class Meals {
     private String meal;
     private double calories;
     private LocalDate date;
+   // private int userIdMeal;
 
     // Default constructor required by Room
     public Meals() {
@@ -27,6 +28,15 @@ public class Meals {
         this.calories = calories;
         this.date = date;
     }
+
+/*
+    // overload constructor
+    public Meals(String meal, double calories, LocalDate date, int userIdMeal) {
+        this.meal = meal;
+        this.calories = calories;
+        this.date = date;
+       // this.userIdMeal = userIdMeal;
+    }*/
 
     // Getter and Setters
     public int getId() {

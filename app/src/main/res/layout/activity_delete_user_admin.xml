@@ -11,43 +11,32 @@
         android:id="@+id/deleteUserAdmin"
         android:layout_width="341dp"
         android:layout_height="60dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="76dp"
         android:padding="8dp"
         android:text="@string/delete_user_admin"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintHorizontal_bias="0.985"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/userLogTextView"
-        android:layout_width="390dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/display_users"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteUserAdmin" />
 
     <TextView
         android:id="@+id/userAdminLabelTextView"
         android:layout_width="144dp"
         android:layout_height="39dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="180dp"
         android:text="@string/user_admin"
         android:textSize="19sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/deleteUserAdmin" />
 
     <TextView
         android:id="@+id/deleteUserAdminLabelTextView"
         android:layout_width="145dp"
         android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
         android:text="@string/delete_User_admin"
         android:textSize="21sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,15 +46,15 @@
         android:id="@+id/userAdminEditText"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="160dp"
         android:autofillHints="enter admin to delete"
         android:hint="@string/enter_a_user_or_admin_to_delete"
         android:inputType="text"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
+        app:layout_constraintHorizontal_bias="0.993"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userLogTextView" />
+        app:layout_constraintTop_toBottomOf="@id/deleteUserAdmin" />
 
     <Button
         android:id="@+id/userAdminDeleteButton"
@@ -83,9 +72,9 @@
         android:id="@+id/homeNav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
-        android:layout_marginEnd="160dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginEnd="164dp"
         android:text="@string/home"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/deleteUserAdmin" />
 </androidx.constraintlayout.widget.ConstraintLayout>
