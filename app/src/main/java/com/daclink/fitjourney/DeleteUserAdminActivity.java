@@ -76,14 +76,14 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
 
        /* String userId = binding.userAdminEditText.getText().toString().trim();
         if (userId.isEmpty()) {
-            Toast.makeText(this, "Please enter a User ID", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter a Username", Toast.LENGTH_SHORT).show();
             return;
         }
         int username;
         try {
             username = Integer.parseInt(userId);
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Invalid User ID", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid Username", Toast.LENGTH_SHORT).show();
             return;
         }
         repository.deleteUser(username, new FitJourneyRepository.RepositoryCallback() {
