@@ -20,11 +20,11 @@ import com.daclink.fitjourney.MainActivity;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Exercise.class, Meals.class, User.class }, version = 3, exportSchema = false)
+@Database(entities = {Exercise.class, Meals.class, User.class }, version = 1, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class FitJourneyDatabase extends RoomDatabase {
 
-    public static final String DATABASE_NAME = "FitJourney Database";
+    public static final String DATABASE_NAME = "FitJourneyDatabase";
 
     public static final String EXERCISE_TABLE = "Exercise";
 
@@ -35,7 +35,7 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
 
 
     private static volatile FitJourneyDatabase INSTANCE;
-    private static final int NUMBER_OF_THREADS = 5;
+    private static final int NUMBER_OF_THREADS = 4;
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
@@ -62,8 +62,15 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
                                         admin.setAdmin(true);
                                         userDAO.insert(admin);
 
+                                        User admin2 = new User("Admin2","admin2" );
+                                        admin2.setAdmin(true);
+                                        userDAO.insert(admin2);
+
                                         User testUser1 = new User("testUser1", "testUser1");
                                         userDAO.insert(testUser1);
+
+                                        User testUser2 = new User("testUser2", "testUser2");
+                                        userDAO.insert(testUser2);
                                     });
                                 }
                             })
@@ -85,12 +92,21 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
             User admin = new User("Admin1","admin1" );
             admin.setAdmin(true);
             dao.insert(admin);
+            User admin2 = new User("Admin2","admin2" );
+            admin2.setAdmin(true);
+            dao.insert(admin2);
 
             User testUser1 = new User("testUser1", "testUser1");
-            dao.insert(testUser1);        }
+            User testUser2 = new User("testUser2", "testUser2");
+            dao.insert(testUser1);
+            dao.insert(testUser2);
+
+        }
     };
 
-    public abstract FitJourneyDAO fitJourneyDAO();
+
+
+    //public abstract FitJourneyDAO fitJourneyDAO();
     public abstract MealsDAO mealsDAO();
     public abstract UserDAO userDAO();
     public abstract ExerciseDAO exerciseDAO();
