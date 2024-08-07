@@ -1,5 +1,7 @@
 package com.daclink.fitjourney;
 
+import static kotlinx.coroutines.CoroutineScopeKt.CoroutineScope;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,49 +11,36 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.room.Room;
 
 import com.daclink.fitjourney.Database.FitJourneyRepository;
 import com.daclink.fitjourney.Database.entities.User;
 import com.daclink.fitjourney.databinding.ActivitySettingsBinding;
 
 public class SettingsActivity extends AppCompatActivity {
-
     private ActivitySettingsBinding binding;
-
-    FitJourneyRepository repository;
+    private FitJourneyRepository repository;
+    private String mUserName;
+    private String mPassword;
+    private LiveData<User> userObserver;  // Declare LiveData outside
 
     private int loggedInUserId;
-
+    private static final String TAG = "SettingsActivity";
     private static final int LOGGED_OUT = -1;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         repository = FitJourneyRepository.getRepository(getApplication());
 
         loggedInUserId = getLoggedInUserId();
 
-        binding.homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToHome();
-            }
-        });
-
-
-        binding.changeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetPassword();
-            }
+        binding.changeButton.setOnClickListener(v -> {
+            resetPassword();  // Trigger account creation
         });
     }
 
@@ -61,11 +50,12 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void resetPassword() {
+        String username = binding.UsernameEditText.getText().toString();
         String currentPassword = binding.currentInputEditText.getText().toString();
         String newPassword = binding.newInputEditText.getText().toString();
         String confirmPassword = binding.confirmPasswordEditText.getText().toString();
 
-        if (TextUtils.isEmpty(currentPassword) || TextUtils.isEmpty(newPassword) || TextUtils.isEmpty(confirmPassword)) {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(currentPassword) || TextUtils.isEmpty(newPassword) || TextUtils.isEmpty(confirmPassword)) {
             Toast.makeText(SettingsActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -75,28 +65,40 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
 
-        LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId);
+        Log.d(TAG, "Fetching user with username: " + username);
+
+        // Observe user by username
+        userObserver = repository.getUserByUsername(username);
         userObserver.observe(this, user -> {
-            if (user != null && user.getPassword().equals(currentPassword)) {
-                user.setPassword(newPassword);
-                repository.updateUser(user);
-                Toast.makeText(SettingsActivity.this, "Password updated successfully", Toast.LENGTH_SHORT).show();
+            if (user != null) {
+                Log.d(TAG, "User found: " + user.getUsername());
+                Log.d(TAG, "Stored password: " + user.getPassword());
+                Log.d(TAG, "Entered current password: " + currentPassword);
+                if (user.getPassword().equals(currentPassword)) {
+                    user.setPassword(newPassword);
+                    repository.updateUser(user);
+                    Toast.makeText(SettingsActivity.this, "Password updated successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SettingsActivity.this, "Current password is incorrect", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(SettingsActivity.this, "Current password is incorrect", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "User is null");
+                Toast.makeText(SettingsActivity.this, "User not found", Toast.LENGTH_SHORT).show();
             }
             userObserver.removeObservers(this);
         });
     }
-    private void navigateToHome() {
-        Intent intent = new Intent(SettingsActivity.this, WelcomeUserActivity.class);
-        startActivity(intent);
-    }
-/*
-    public static Intent settingsIntentFactory(Context context, int userId) {
-        Intent intent = new Intent(context, SettingsActivity.class);
-        intent.putExtra(SettingsActivity.SETTINGS_ACTIVITY_USER_ID, userId);
-        return intent;
+
+
+  /*  @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (userObserver != null) {
+            userObserver.removeObservers(this);  // Clean up observer
+        }
     }*/
 
+    static Intent SettingsIntentFactory(Context context) {
+        return new Intent(context, SettingsActivity.class);
+    }
 }
-
