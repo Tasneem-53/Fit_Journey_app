@@ -37,9 +37,9 @@ public abstract class FitJourneyDatabase extends RoomDatabase {
     private static volatile FitJourneyDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
 
-    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static FitJourneyDatabase getDatabase(final Context context){
+    public static FitJourneyDatabase getDatabase(final Context context){
         if(INSTANCE == null){
             synchronized (FitJourneyDatabase.class){
                 if(INSTANCE == null){
