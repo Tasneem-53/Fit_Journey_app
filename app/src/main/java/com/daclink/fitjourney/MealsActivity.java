@@ -1,6 +1,10 @@
 package com.daclink.fitjourney;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +14,7 @@ import com.daclink.fitjourney.databinding.ActivityMealsBinding;
 
 import java.time.LocalDate;
 import java.util.List;
-
+import java.util.Locale;  // Import statement added
 
 public class MealsActivity extends AppCompatActivity {
 
@@ -26,8 +30,8 @@ public class MealsActivity extends AppCompatActivity {
         repository = new FitJourneyRepository(getApplication());
 
         binding.homeButton.setOnClickListener(v -> {
-            finish(); // This will close the MealsActivity and go back to MainActivity
-       });
+            finish(); // Close the MealsActivity
+        });
 
         binding.submitButton.setOnClickListener(v -> {
             handleSubmit();
@@ -36,7 +40,7 @@ public class MealsActivity extends AppCompatActivity {
         loadMeals();
     }
 
-    // Process the data, e.g., save to the database
+    // Save to the database
     private void handleSubmit() {
         String mealName = binding.mealNameEditText.getText().toString();
         String mealCalories = binding.mealCaloriesEditText.getText().toString();
@@ -61,22 +65,28 @@ public class MealsActivity extends AppCompatActivity {
         }
     }
 
-
     private void loadMeals() {
         // Load the meals from the repository
         new Thread(() -> {
             List<Meals> mealsList = repository.getAllMeals();
             runOnUiThread(() -> {
-                StringBuilder mealsText = new StringBuilder();
-                for (Meals meal : mealsList) {
-                    mealsText.append("Meal: ").append(meal.getMeal())
-                            .append(", Calories: ").append(meal.getCalories())
-                            .append(", Date: ").append(meal.getDate())
-                            .append("\n");
-                }
-                binding.mealsDisplayTextView.setText(mealsText.toString());
+                updateMealsLayout(mealsList);
             });
         }).start();
     }
 
+    private void updateMealsLayout(List<Meals> mealsList) {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        LinearLayout layout = binding.mealsLayout;
+
+        layout.removeAllViews();
+
+        for (Meals meal : mealsList) {
+            View itemView = inflater.inflate(R.layout.item_meal, layout, false);
+            ((TextView) itemView.findViewById(R.id.titleTextView)).setText(String.format(Locale.US, "Meal: %s", meal.getMeal()));
+            ((TextView) itemView.findViewById(R.id.detailsTextView)).setText(String.format(Locale.US, "Date: %s\nCalories: %.2f",
+                    meal.getDate(), meal.getCalories()));
+            layout.addView(itemView);
+        }
+    }
 }

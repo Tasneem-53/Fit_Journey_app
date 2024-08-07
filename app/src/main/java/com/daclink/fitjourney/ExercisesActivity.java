@@ -1,6 +1,10 @@
 package com.daclink.fitjourney;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +14,7 @@ import com.daclink.fitjourney.databinding.ActivityExercisesBinding;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 public class ExercisesActivity extends AppCompatActivity {
 
@@ -25,7 +30,7 @@ public class ExercisesActivity extends AppCompatActivity {
         repository = new FitJourneyRepository(getApplication());
 
         binding.homeButton.setOnClickListener(v -> {
-            finish(); // Close the ExercisesActivity and go back to MainActivity
+            finish(); // Close the ExercisesActivity
         });
 
         binding.submitButton.setOnClickListener(v -> {
@@ -35,7 +40,7 @@ public class ExercisesActivity extends AppCompatActivity {
         loadExercises();
     }
 
-    //Process & Save the data, refresh and reset.
+    // Save to the database
     private void handleSubmit() {
         String exerciseName = binding.exerciseNameEditText.getText().toString();
         String exerciseDuration = binding.exerciseDurationEditText.getText().toString();
@@ -65,16 +70,23 @@ public class ExercisesActivity extends AppCompatActivity {
         new Thread(() -> {
             List<Exercise> exercisesList = repository.getAllExercises();
             runOnUiThread(() -> {
-                StringBuilder exercisesText = new StringBuilder();
-                for (Exercise exercise : exercisesList) {
-                    exercisesText.append("Exercise: ").append(exercise.getName())
-                            .append(", Duration: ").append(exercise.getDuration())
-                            .append(" minutes, Date: ").append(exercise.getDate())
-                            .append("\n");
-                }
-                binding.exercisesDisplayTextView.setText(exercisesText.toString());
+                updateExercisesLayout(exercisesList);
             });
         }).start();
     }
 
+    private void updateExercisesLayout(List<Exercise> exercisesList) {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        LinearLayout layout = binding.exercisesLayout;
+
+        layout.removeAllViews();
+
+        for (Exercise exercise : exercisesList) {
+            View itemView = inflater.inflate(R.layout.item_exercise, layout, false);
+            ((TextView) itemView.findViewById(R.id.titleTextView)).setText(String.format(Locale.US, "Exercise: %s", exercise.getName()));
+            ((TextView) itemView.findViewById(R.id.detailsTextView)).setText(String.format(Locale.US, "Date: %s\nDuration: %.2f minutes",
+                    exercise.getDate(), exercise.getDuration()));
+            layout.addView(itemView);
+        }
+    }
 }

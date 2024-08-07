@@ -10,7 +10,7 @@
         android:id="@+id/meals_title_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/meals"
+        android:text="Meals"
         android:textSize="45sp"
         android:layout_marginTop="16dp"
         android:gravity="center"
@@ -27,11 +27,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/meals_display_textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/mealsLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/display_past_meals_here"
+            android:orientation="vertical"
             android:padding="16dp" />
     </ScrollView>
 
