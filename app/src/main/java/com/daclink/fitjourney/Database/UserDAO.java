@@ -20,11 +20,11 @@ public interface UserDAO {
     @Update
     void update(User user);
 
+    @Update
+    void updateUser(User user);
+
     @Delete
     void delete(User user);
-
-    @Query("SELECT * FROM User WHERE id = :userId")
-    User getUserByUserId(int userId);
 
     @Query("DELETE FROM User WHERE id = :userId")
     int deleteUserByUserId(int userId);
@@ -40,6 +40,10 @@ public interface UserDAO {
 
     @Query(" DELETE FROM " + FitJourneyDatabase.USER_TABLE)
     void deleteAll();
+
+    @Query("SELECT * FROM User WHERE id = :userId")
+    LiveData<User> getUserByUserId(int userId);
+
 
     @Query("SELECT * FROM User WHERE username = :username")
     LiveData<User> getUserByUsername(String username);

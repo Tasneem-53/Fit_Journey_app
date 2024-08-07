@@ -76,4 +76,6 @@
     <string name="confirm_password_hint">Confirm password</string>
     <string name="enter_usernames">Enter username</string>
     <string name="usernames">Username:</string>
+    <string name="preference_file_key">daclinkPreferenceKeyFileFitJourney</string>
+    <string name="preference_userId_key">daclinkPreferenceUserIdKeyFitJourney</string>
 </resources>

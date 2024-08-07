@@ -121,6 +121,10 @@ public class FitJourneyRepository {
         });
     }
 
+    public LiveData<User> getUserByUserId(int userId) {
+        return userDAO.getUserByUserId(userId);
+    }
+
     // Get a user by username
     public LiveData<User> getUserByUsername(String username) {
         return userDAO.getUserByUsername(username);
@@ -129,7 +133,7 @@ public class FitJourneyRepository {
     // Update user password
     public void updateUser(User user) {
         FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
-            userDAO.update(user);
+            userDAO.updateUser(user);
         });
     }
 
