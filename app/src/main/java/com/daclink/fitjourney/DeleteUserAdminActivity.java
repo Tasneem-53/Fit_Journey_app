@@ -25,7 +25,7 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
         binding = ActivityDeleteUserAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.userLogTextView.setMovementMethod(new ScrollingMovementMethod());
+       // binding.userLogTextView.setMovementMethod(new ScrollingMovementMethod());
 
         db = FitJourneyDatabase.getDatabase(getApplicationContext());
 
