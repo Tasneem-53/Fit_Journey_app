@@ -25,8 +25,7 @@ public class AddUserAdminActivity extends AppCompatActivity {
         binding.homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddUserAdminActivity.this, WelcomeUserActivity.class);
-                startActivity(intent);
+                startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext()));
             }
 
 

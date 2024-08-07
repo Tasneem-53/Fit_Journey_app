@@ -1,6 +1,10 @@
 package com.daclink.fitjourney;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,11 +14,15 @@ import com.daclink.fitjourney.databinding.ActivityExercisesBinding;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ExercisesActivity extends AppCompatActivity {
 
     private ActivityExercisesBinding binding;
     private FitJourneyRepository repository;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,20 +30,23 @@ public class ExercisesActivity extends AppCompatActivity {
         binding = ActivityExercisesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        repository = new FitJourneyRepository(getApplication());
+        executorService = Executors.newSingleThreadExecutor(); // Initialize ExecutorService
+
+        executorService.execute(() -> {
+            repository = new FitJourneyRepository(getApplication());
+            runOnUiThread(this::loadExercises); // Load after repository initialization
+        });
 
         binding.homeButton.setOnClickListener(v -> {
-            finish(); // Close the ExercisesActivity and go back to MainActivity
+           startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext()));
         });
 
         binding.submitButton.setOnClickListener(v -> {
             handleSubmit();
         });
-
-        loadExercises();
     }
 
-    //Process & Save the data, refresh and reset.
+    // Save to the database
     private void handleSubmit() {
         String exerciseName = binding.exerciseNameEditText.getText().toString();
         String exerciseDuration = binding.exerciseDurationEditText.getText().toString();
@@ -44,10 +55,10 @@ public class ExercisesActivity extends AppCompatActivity {
             double duration = Double.parseDouble(exerciseDuration);
             Exercise exercise = new Exercise(exerciseName, duration, LocalDate.now());
 
-            repository.insertExercise(exercise);
-
-            // Refresh the exercise list
-            loadExercises();
+            executorService.execute(() -> {
+                repository.insertExercise(exercise);
+                runOnUiThread(this::loadExercises);
+            });
 
             String message = "Exercise: " + exerciseName + "\nDuration: " + duration + " minutes";
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -62,19 +73,26 @@ public class ExercisesActivity extends AppCompatActivity {
 
     // Load the exercises from the repository
     private void loadExercises() {
-        new Thread(() -> {
+        executorService.execute(() -> {
             List<Exercise> exercisesList = repository.getAllExercises();
             runOnUiThread(() -> {
-                StringBuilder exercisesText = new StringBuilder();
-                for (Exercise exercise : exercisesList) {
-                    exercisesText.append("Exercise: ").append(exercise.getName())
-                            .append(", Duration: ").append(exercise.getDuration())
-                            .append(" minutes, Date: ").append(exercise.getDate())
-                            .append("\n");
-                }
-                binding.exercisesDisplayTextView.setText(exercisesText.toString());
+                updateExercisesLayout(exercisesList);
             });
-        }).start();
+        });
     }
 
+    private void updateExercisesLayout(List<Exercise> exercisesList) {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        LinearLayout layout = binding.exercisesLayout;
+
+        layout.removeAllViews();
+
+        for (Exercise exercise : exercisesList) {
+            View itemView = inflater.inflate(R.layout.item_exercise, layout, false);
+            ((TextView) itemView.findViewById(R.id.titleTextView)).setText(String.format(Locale.US, "Exercise: %s", exercise.getName()));
+            ((TextView) itemView.findViewById(R.id.detailsTextView)).setText(String.format(Locale.US, "Date: %s\nDuration: %.2f minutes",
+                    exercise.getDate(), exercise.getDuration()));
+            layout.addView(itemView);
+        }
+    }
 }

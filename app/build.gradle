@@ -43,8 +43,22 @@ dependencies {
 
     def room_version = "2.6.1"
 
-
-    implementation "androidx.room:room-runtime:$room_version"
+    //database dependencies
+    implementation libs.room.runtime
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // Unit testing dependencies
+    testImplementation libs.junit
+    testImplementation libs.mockito.core
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
+
+    // Instrumented testing dependencies
+    androidTestImplementation libs.junit.v113
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.4.0"
+    androidTestImplementation "androidx.test:runner:1.4.0"
+    androidTestImplementation "androidx.test:rules:1.4.0"
+    androidTestImplementation 'androidx.room:room-testing:2.3.0'
+
 
 }
