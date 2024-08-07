@@ -24,8 +24,7 @@ public class AdminPageActivity extends AppCompatActivity {
         binding.adminHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminPageActivity.this, WelcomeUserActivity.class);
-                startActivity(intent);
+                startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext()));
             }
         });
 

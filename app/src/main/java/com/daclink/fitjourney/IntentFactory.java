@@ -11,6 +11,12 @@ public class IntentFactory {
     static Intent createAccountIntentFactory(Context context) {
         return new Intent(context, CreateAccountActivity.class);
     }
+    //Intent factory for AdminActivity
+    static Intent adminPageIntentFactory(Context context) {
+        return new Intent(context, AdminPageActivity.class);
+    }
+
+
 
     //Intent factory for LoginActivity
     static Intent loginIntentFactory(Context context) {

@@ -77,7 +77,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
             });
 
             binding.adminButton.setOnClickListener(view -> {
-                startActivity(IntentFactory.loginIntentFactory(getApplicationContext()));
+                startActivity(IntentFactory.adminPageIntentFactory(getApplicationContext()));
             });
         }
 
