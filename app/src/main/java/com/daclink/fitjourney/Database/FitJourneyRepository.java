@@ -1,5 +1,7 @@
 package com.daclink.fitjourney.Database;
 
+import static com.daclink.fitjourney.Database.FitJourneyDatabase.databaseWriteExecutor;
+
 import android.app.Application;
 import android.util.Log;
 
@@ -141,7 +143,10 @@ public class FitJourneyRepository {
     public void updatePassword(String username, String newPassword) {
         FitJourneyDatabase.databaseWriteExecutor.execute(() -> userDAO.updatePassword(username, newPassword));
     }
+    public void insertNewUser(User user) {
+        databaseWriteExecutor.execute(() -> userDAO.insert(user));
 
+        userDAO.insert(user);}
 
 
     public interface RepositoryCallback {
