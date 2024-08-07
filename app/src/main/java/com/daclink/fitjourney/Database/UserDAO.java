@@ -56,6 +56,9 @@ public interface UserDAO {
 
     @Query("DELETE FROM user WHERE username = :username")
     int deleteUserByUsername(String username);
+
+    @Query("SELECT * FROM user WHERE username = :username AND admin = 1 LIMIT 1")
+    User getAdminByUsername(String username);
 }
 
 

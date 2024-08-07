@@ -54,7 +54,26 @@ public class AddUserAdminActivity extends AppCompatActivity {
         });
     }
     private void addAdmin(String username, String password) {
-        User newAdmin = new User(username, password);
+
+        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+            User existingAdmin = db.userDAO().getAdminByUsername(username);
+            runOnUiThread(() -> {
+                if (existingAdmin != null) {
+                    Toast.makeText(this, "Admin already exists", Toast.LENGTH_SHORT).show();
+                } else {
+                    User newAdmin = new User(username, password);
+                    newAdmin.setAdmin(true);
+                    FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+                        db.userDAO().insert(newAdmin);
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, "Admin added successfully", Toast.LENGTH_SHORT).show();
+                        });
+                    });
+                }
+            });
+        });
+
+        /*  User newAdmin = new User(username, password);
         newAdmin.setAdmin(true);
         FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
             db.userDAO().insert(newAdmin);
@@ -63,5 +82,5 @@ public class AddUserAdminActivity extends AppCompatActivity {
             });
         });
 
-    }
+  */  }
 }
