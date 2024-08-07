@@ -1,3 +1,4 @@
+//@authoer
 package com.daclink.fitjourney;
 
 import android.content.Context;
@@ -19,7 +20,6 @@ public class LoginActivity extends AppCompatActivity {
     private FitJourneyRepository repository;
     private String mUserName;
     private String mPassword;
-    UserDAO userDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
