@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.daclink.fitjourney.Database.FitJourneyDatabase;
 import com.daclink.fitjourney.Database.FitJourneyRepository;
 import com.daclink.fitjourney.databinding.ActivityDeleteUserAdminBinding;
 
@@ -14,6 +16,8 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
 
     ActivityDeleteUserAdminBinding binding;
     FitJourneyRepository repository;
+
+    private FitJourneyDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,29 +27,54 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
 
         binding.userLogTextView.setMovementMethod(new ScrollingMovementMethod());
 
-        repository = new FitJourneyRepository(getApplication());
-
-        binding.userAdminDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteUser();
-            }
-        });
+        db = FitJourneyDatabase.getDatabase(getApplicationContext());
 
         binding.homeNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DeleteUserAdminActivity.this, WelcomeUserActivity.class);
-                startActivity(intent);
+                startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext()));
             }
+        });
 
-    });
+        binding.userAdminDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = binding.userAdminEditText.getText().toString().trim();
 
+                if (username.isEmpty()) {
+                    Toast.makeText(DeleteUserAdminActivity.this, "Please enter a User ID", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+/*
+                int userIdInt;
+                try {
+                    userIdInt = Integer.parseInt(userId);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(DeleteUserAdminActivity.this, "Invalid User ID", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+*/
+                deleteUser(username);
+            }
+        });
 
     }
 
-    private void deleteUser() {
-        String userId = binding.userAdminEditText.getText().toString().trim();
+    private void deleteUser(String username) {
+        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+            int rowsDeleted = db.userDAO().deleteUserByUsername(username);
+            runOnUiThread(() -> {
+                if (rowsDeleted > 0) {
+                    Toast.makeText(this, "User deleted successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Failed to delete user", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+
+        }
+
+       /* String userId = binding.userAdminEditText.getText().toString().trim();
         if (userId.isEmpty()) {
             Toast.makeText(this, "Please enter a User ID", Toast.LENGTH_SHORT).show();
             return;
@@ -73,6 +102,6 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
                 });
             }
         });
+*/
 
-    }
 }

@@ -16,6 +16,8 @@ import com.daclink.fitjourney.MainActivity;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class FitJourneyRepository {
@@ -23,7 +25,8 @@ public class FitJourneyRepository {
     private final ExerciseDAO exerciseDAO;
     private final UserDAO userDAO;
 
-
+    private static final int NUMBER_OF_THREADS = 4;
+    //static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
 
     private static FitJourneyRepository repository;
@@ -116,9 +119,10 @@ public class FitJourneyRepository {
         });
     }
 
-    public void deleteUser(final int username, final RepositoryCallback callback) {
-        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
-            int rowsDeleted = userDAO.deleteUserByUserId(username);
+    public void deleteUser(final int userId, final RepositoryCallback callback) {
+
+          FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+            int rowsDeleted = userDAO.deleteUserByUserId(userId);
             callback.onComplete(rowsDeleted > 0);
         });
     }

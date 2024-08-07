@@ -38,6 +38,9 @@ public interface UserDAO {
     @Query("SELECT * FROM " + FitJourneyDatabase.USER_TABLE)
     List<User> getAllUsers();
 
+    @Query("SELECT * FROM User WHERE id = :id")
+    User getUserById(int id);
+
     @Query(" DELETE FROM " + FitJourneyDatabase.USER_TABLE)
     void deleteAll();
 
@@ -50,6 +53,9 @@ public interface UserDAO {
 
     @Query("UPDATE User SET password = :password WHERE username = :username")
     void updatePassword(String username, String password);
+
+    @Query("DELETE FROM user WHERE username = :username")
+    int deleteUserByUsername(String username);
 }
 
 
