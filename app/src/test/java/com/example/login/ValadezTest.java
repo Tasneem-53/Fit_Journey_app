@@ -32,10 +32,22 @@ public class ValadezTest {
     }
 
     @Test
-    public void TestingUseName(){
+    public void TestingUserName(){
          assertEquals(testName1, testUser1.getUsername());
-         assertNotEquals(testPassword2,testUser1.getUsername());
-         //assertEquals(isAdmin,testUser.getAdmin());
+         assertEquals(testName2, testUser2.getUsername());
+         assertNotEquals(testName2,testUser1.getUsername());
+         assertNotEquals(testName1, testUser2.getUsername());
+
+    }
+
+    @Test
+    public void TestingUserPassword(){
+        assertEquals(testPassword1, testUser1.getPassword());
+        assertEquals(testPassword2, testUser2.getPassword());
+        assertNotEquals(testPassword2, testUser1.getPassword());
+        assertNotEquals(testPassword1, testUser2.getPassword());
+
+
     }
 
 }
