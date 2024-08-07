@@ -22,6 +22,8 @@ import com.daclink.fitjourney.Database.entities.User;
 import com.daclink.fitjourney.databinding.ActivityLoginBinding;
 import com.daclink.fitjourney.databinding.ActivityWelcomeUserBinding;
 
+import java.util.concurrent.ExecutorService;
+
 public class WelcomeUserActivity extends AppCompatActivity {
         static final String WELCOME_USER_ACTIVITY_USER_ID = "com.daclink.fitjourney.MAIN_ACTIVITY_USER_ID";
         private static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.daclink.fitjourney.SAVED_INSTANCE_STATE_USERID_KEY";
@@ -31,8 +33,10 @@ public class WelcomeUserActivity extends AppCompatActivity {
         private User user;
         private int loggedInUserId = LOGGED_OUT;
         private ActivityWelcomeUserBinding binding;
+        private ExecutorService executorService;
 
-        @Override
+
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             binding = ActivityWelcomeUserBinding.inflate(getLayoutInflater());
@@ -116,6 +120,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
                 }
             });
         }
+        //todo to s
 
         private void logout() {
             loggedInUserId = LOGGED_OUT;

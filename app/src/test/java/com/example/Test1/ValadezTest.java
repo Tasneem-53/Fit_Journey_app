@@ -1,6 +1,6 @@
 //Adan Valadez
 
-package com.example.login;
+package com.example.Test1;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
