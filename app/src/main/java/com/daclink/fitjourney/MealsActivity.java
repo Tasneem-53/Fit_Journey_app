@@ -14,12 +14,15 @@ import com.daclink.fitjourney.databinding.ActivityMealsBinding;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;  // Import statement added
+import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MealsActivity extends AppCompatActivity {
 
     private ActivityMealsBinding binding;
     private FitJourneyRepository repository;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,12 @@ public class MealsActivity extends AppCompatActivity {
         binding = ActivityMealsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        repository = new FitJourneyRepository(getApplication());
+        executorService = Executors.newSingleThreadExecutor(); // Initialize ExecutorService
+
+        executorService.execute(() -> {
+            repository = new FitJourneyRepository(getApplication());
+            runOnUiThread(this::loadMeals); // Load after repository initialization
+        });
 
         binding.homeButton.setOnClickListener(v -> {
             finish(); // Close the MealsActivity
@@ -36,8 +44,6 @@ public class MealsActivity extends AppCompatActivity {
         binding.submitButton.setOnClickListener(v -> {
             handleSubmit();
         });
-
-        loadMeals();
     }
 
     // Save to the database
@@ -49,10 +55,10 @@ public class MealsActivity extends AppCompatActivity {
             double calories = Double.parseDouble(mealCalories);
             Meals meal = new Meals(mealName, calories, LocalDate.now());
 
-            repository.insertMeal(meal);
-
-            // Refresh the meal list
-            loadMeals();
+            executorService.execute(() -> {
+                repository.insertMeal(meal);
+                runOnUiThread(this::loadMeals);
+            });
 
             String message = "Meal: " + mealName + "\nCalories: " + calories;
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -65,14 +71,14 @@ public class MealsActivity extends AppCompatActivity {
         }
     }
 
+    //Load the meals from the repository
     private void loadMeals() {
-        // Load the meals from the repository
-        new Thread(() -> {
+        executorService.execute(() -> {
             List<Meals> mealsList = repository.getAllMeals();
             runOnUiThread(() -> {
                 updateMealsLayout(mealsList);
             });
-        }).start();
+        });
     }
 
     private void updateMealsLayout(List<Meals> mealsList) {

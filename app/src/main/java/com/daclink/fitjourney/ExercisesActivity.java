@@ -15,11 +15,14 @@ import com.daclink.fitjourney.databinding.ActivityExercisesBinding;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ExercisesActivity extends AppCompatActivity {
 
     private ActivityExercisesBinding binding;
     private FitJourneyRepository repository;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,12 @@ public class ExercisesActivity extends AppCompatActivity {
         binding = ActivityExercisesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        repository = new FitJourneyRepository(getApplication());
+        executorService = Executors.newSingleThreadExecutor(); // Initialize ExecutorService
+
+        executorService.execute(() -> {
+            repository = new FitJourneyRepository(getApplication());
+            runOnUiThread(this::loadExercises); // Load after repository initialization
+        });
 
         binding.homeButton.setOnClickListener(v -> {
             finish(); // Close the ExercisesActivity
@@ -36,8 +44,6 @@ public class ExercisesActivity extends AppCompatActivity {
         binding.submitButton.setOnClickListener(v -> {
             handleSubmit();
         });
-
-        loadExercises();
     }
 
     // Save to the database
@@ -49,10 +55,10 @@ public class ExercisesActivity extends AppCompatActivity {
             double duration = Double.parseDouble(exerciseDuration);
             Exercise exercise = new Exercise(exerciseName, duration, LocalDate.now());
 
-            repository.insertExercise(exercise);
-
-            // Refresh the exercise list
-            loadExercises();
+            executorService.execute(() -> {
+                repository.insertExercise(exercise);
+                runOnUiThread(this::loadExercises);
+            });
 
             String message = "Exercise: " + exerciseName + "\nDuration: " + duration + " minutes";
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -67,12 +73,12 @@ public class ExercisesActivity extends AppCompatActivity {
 
     // Load the exercises from the repository
     private void loadExercises() {
-        new Thread(() -> {
+        executorService.execute(() -> {
             List<Exercise> exercisesList = repository.getAllExercises();
             runOnUiThread(() -> {
                 updateExercisesLayout(exercisesList);
             });
-        }).start();
+        });
     }
 
     private void updateExercisesLayout(List<Exercise> exercisesList) {

@@ -27,12 +27,12 @@ public class ProgressActivity extends AppCompatActivity {
         binding = ActivityProgressBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Initialize the repository
-        repository = new FitJourneyRepository(getApplication());
-        executorService = Executors.newSingleThreadExecutor();
+        executorService = Executors.newSingleThreadExecutor(); // Initialize ExecutorService
 
-        // Fetch data and update UI
-        fetchDataAndDisplay();
+        executorService.execute(() -> {
+            repository = new FitJourneyRepository(getApplication());
+            runOnUiThread(this::fetchDataAndDisplay); // Load after repository initialization
+        });
 
         binding.homeButton.setOnClickListener(v -> {
             Intent intent = new Intent(ProgressActivity.this, WelcomeUserActivity.class);
@@ -68,7 +68,7 @@ public class ProgressActivity extends AppCompatActivity {
         return meal.getCalories() / 3500;
     }
 
-    //Updates the UI with progress data by inflating views for each exercise and meal.
+    // Updates the UI with progress data.
     private void updateProgressLayout(ProgressData progressData) {
         LayoutInflater inflater = LayoutInflater.from(this);
         LinearLayout layout = binding.progressLayout;
