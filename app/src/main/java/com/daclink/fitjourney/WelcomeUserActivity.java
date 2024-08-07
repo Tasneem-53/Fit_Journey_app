@@ -23,7 +23,7 @@ import com.daclink.fitjourney.databinding.ActivityLoginBinding;
 import com.daclink.fitjourney.databinding.ActivityWelcomeUserBinding;
 
 public class WelcomeUserActivity extends AppCompatActivity {
-        private static final String WELCOME_USER_ACTIVITY_USER_ID = "com.daclink.fitjourney.MAIN_ACTIVITY_USER_ID";
+        static final String WELCOME_USER_ACTIVITY_USER_ID = "com.daclink.fitjourney.MAIN_ACTIVITY_USER_ID";
         private static final String SHARED_PREFERENCE_USERID_KEY = "com.daclink.fitjourney.SHARED_PREFENCE_USERID_KEY";
         private static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.daclink.fitjourney.SAVED_INSTANCE_STATE_USERID_KEY";
         private static final int LOGGED_OUT = -1;
@@ -88,16 +88,6 @@ public class WelcomeUserActivity extends AppCompatActivity {
         }
 
 
-
-        static Intent welcomeIntentFactory(Context context) {
-            return new Intent(context, WelcomeUserActivity.class);
-        }
-
-        static Intent welcomeIntentFactory(Context context, int userId) {
-            Intent intent = new Intent(context, WelcomeUserActivity.class);
-            intent.putExtra(WELCOME_USER_ACTIVITY_USER_ID, userId);
-            return intent;
-        }
 
         private void loginUser(Bundle savedInstanceState) {
             SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -191,4 +181,17 @@ public class WelcomeUserActivity extends AppCompatActivity {
             outState.putInt(SAVED_INSTANCE_STATE_USERID_KEY, loggedInUserId);
             updateSharedPreference();
         }
+
+    static Intent welcomeIntentFactory(Context context) {
+        return new Intent(context, WelcomeUserActivity.class);
     }
+
+    static Intent welcomeIntentFactory(Context context, int userId) {
+        Intent intent = new Intent(context, WelcomeUserActivity.class);
+        intent.putExtra(WELCOME_USER_ACTIVITY_USER_ID, userId);
+        return intent;
+    }
+
+
+
+}

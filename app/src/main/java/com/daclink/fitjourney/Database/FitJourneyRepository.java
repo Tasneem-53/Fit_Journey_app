@@ -1,5 +1,7 @@
 package com.daclink.fitjourney.Database;
 
+import static com.daclink.fitjourney.Database.FitJourneyDatabase.databaseWriteExecutor;
+
 import android.app.Application;
 import android.util.Log;
 
@@ -40,7 +42,7 @@ public class FitJourneyRepository {
         if (repository != null) {
             return repository;
         }
-        Future<FitJourneyRepository> future = FitJourneyDatabase.databaseWriteExecutor.submit(
+        Future<FitJourneyRepository> future = databaseWriteExecutor.submit(
                 new Callable<FitJourneyRepository>() {
                     @Override
                     public FitJourneyRepository call() throws Exception {
@@ -63,7 +65,7 @@ public class FitJourneyRepository {
 
     public User getUserName(String username) {
         Log.i(MainActivity.TAG, "GETUSERNAME " + username);
-        Future<User> future = FitJourneyDatabase.databaseWriteExecutor.submit(
+        Future<User> future = databaseWriteExecutor.submit(
                 new Callable<User>() {
                     @Override
                     public User call() throws Exception {
@@ -80,7 +82,7 @@ public class FitJourneyRepository {
 
 
     public void insertMeal(Meals meal) {
-        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+        databaseWriteExecutor.execute(() -> {
             mealsDAO.insert(meal);
         });
     }
@@ -90,7 +92,7 @@ public class FitJourneyRepository {
     }
 
     public void insertExercise(Exercise exercise) {
-        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+        databaseWriteExecutor.execute(() -> {
             exerciseDAO.insert(exercise);
         });
     }
@@ -100,7 +102,7 @@ public class FitJourneyRepository {
     }
 
     public void deleteAllExercises() {
-        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+        databaseWriteExecutor.execute(() -> {
             exerciseDAO.deleteAll();
         });
     }
@@ -110,13 +112,13 @@ public class FitJourneyRepository {
     }
 
     public void deleteAllMeals() {
-        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+        databaseWriteExecutor.execute(() -> {
             mealsDAO.deleteAll();
         });
     }
 
     public void deleteUser(final int username, final RepositoryCallback callback) {
-        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
+        databaseWriteExecutor.execute(() -> {
             int rowsDeleted = userDAO.deleteUserByUsername(username);
             callback.onComplete(rowsDeleted > 0);
         });
@@ -132,7 +134,9 @@ public class FitJourneyRepository {
     }
 
     public void insertNewUser(User user) {
-        new Thread(() -> userDAO.insert(user)).start();
+        databaseWriteExecutor.execute(() -> userDAO.insert(user));
+
+        userDAO.insert(user);
     }
 
 

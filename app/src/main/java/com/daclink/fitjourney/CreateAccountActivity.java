@@ -1,5 +1,7 @@
 package com.daclink.fitjourney;
 
+import static kotlinx.coroutines.CoroutineScopeKt.CoroutineScope;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.room.Room;
 
+import com.daclink.fitjourney.Database.FitJourneyDatabase;
 import com.daclink.fitjourney.Database.FitJourneyRepository;
 import com.daclink.fitjourney.Database.entities.User;
 import com.daclink.fitjourney.databinding.ActivityCreateAccountBinding;
@@ -29,7 +33,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         binding.createAccountButton.setOnClickListener(v -> {
             createAccount();  // Trigger account creation
-            Toast.makeText(CreateAccountActivity.this, "ERROR USER ALREADY EXIST!!!!!!!!!!!!!!!. ", Toast.LENGTH_SHORT).show();  // Moved Toast to observer
         });
     }
 
@@ -41,18 +44,19 @@ public class CreateAccountActivity extends AppCompatActivity {
             return;
         }
 
-        userObserver = repository.getUserByUsername(mUserName);  // Initialize LiveData
-        userObserver.observe(this, user -> {
-            if (user == null) {
-                User newUser = new User(mUserName, mPassword);
-                repository.insertNewUser(newUser);
+            userObserver = repository.getUserByUsername(mUserName);
+            userObserver.observe(this, user -> {
+                if (user == null) {
+                    User newUser = new User(mUserName, mPassword);
+                    Toast.makeText(CreateAccountActivity.this, "Success! New user created! Login: " + mUserName, Toast.LENGTH_SHORT).show();
+                    repository.insertNewUser(newUser);
+                    startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
+                } else {
+                    Toast.makeText(CreateAccountActivity.this, "User named exists in database, please login: ", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
-                Toast.makeText(CreateAccountActivity.this, "Success! New user created! Login: " + newUser.getUsername(), Toast.LENGTH_SHORT).show();
-                startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
-
-            }
-        });
-    }
 
     @Override
     protected void onDestroy() {
