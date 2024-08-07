@@ -15,8 +15,8 @@ import com.daclink.fitjourney.MainActivity;
 @Dao
 public interface UserDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User user);
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+     void insert(User user);
 
     @Insert
     void insertAll(User... users);
