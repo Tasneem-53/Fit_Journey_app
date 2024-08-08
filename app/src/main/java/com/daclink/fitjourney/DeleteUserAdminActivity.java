@@ -74,34 +74,4 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
 
         }
 
-       /* String userId = binding.userAdminEditText.getText().toString().trim();
-        if (userId.isEmpty()) {
-            Toast.makeText(this, "Please enter a Username", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        int username;
-        try {
-            username = Integer.parseInt(userId);
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Invalid Username", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        repository.deleteUser(username, new FitJourneyRepository.RepositoryCallback() {
-            @Override
-            public void onComplete(final boolean success) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (success) {
-                            Toast.makeText(DeleteUserAdminActivity.this, "User deleted successfully", Toast.LENGTH_SHORT).show();
-                            binding.userLogTextView.append("User ID " + userId + " deleted\n");
-                        } else {
-                            Toast.makeText(DeleteUserAdminActivity.this, "Failed to delete user", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });
-*/
-
 }

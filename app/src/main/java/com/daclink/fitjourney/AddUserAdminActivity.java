@@ -44,8 +44,8 @@ public class AddUserAdminActivity extends AppCompatActivity {
                 String username = binding.newAdminLabelTextView.getText().toString().trim();
                 String password = binding.newAdminPasswordLabelTextView.getText().toString().trim();
 
-                if (username.isEmpty()) {
-                    Toast.makeText(AddUserAdminActivity.this, "Please enter username", Toast.LENGTH_SHORT).show();
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(AddUserAdminActivity.this, "All fields required", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
