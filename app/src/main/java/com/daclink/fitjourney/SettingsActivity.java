@@ -40,7 +40,7 @@ public class SettingsActivity extends AppCompatActivity {
         loggedInUserId = getLoggedInUserId();
 
         binding.changeButton.setOnClickListener(v -> {
-            resetPassword();  // Trigger account creation
+            resetPassword();
         });
     }
 
