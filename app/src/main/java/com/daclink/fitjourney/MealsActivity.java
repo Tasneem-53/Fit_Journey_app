@@ -1,20 +1,17 @@
+// com/daclink/fitjourney/MealsActivity.java
 package com.daclink.fitjourney;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.daclink.fitjourney.Database.FitJourneyRepository;
 import com.daclink.fitjourney.Database.entities.Meals;
 import com.daclink.fitjourney.databinding.ActivityMealsBinding;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -23,6 +20,7 @@ public class MealsActivity extends AppCompatActivity {
     private ActivityMealsBinding binding;
     private FitJourneyRepository repository;
     private ExecutorService executorService;
+    private MealAdapter mealAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +29,10 @@ public class MealsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         executorService = Executors.newSingleThreadExecutor(); // Initialize ExecutorService
+
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mealAdapter = new MealAdapter(new ArrayList<>()); // Initialize with an empty list
+        binding.recyclerView.setAdapter(mealAdapter);
 
         executorService.execute(() -> {
             repository = new FitJourneyRepository(getApplication());
@@ -71,28 +73,14 @@ public class MealsActivity extends AppCompatActivity {
         }
     }
 
-    //Load the meals from the repository
+    // Load the meals from the repository
     private void loadMeals() {
         executorService.execute(() -> {
             List<Meals> mealsList = repository.getAllMeals();
             runOnUiThread(() -> {
-                updateMealsLayout(mealsList);
+                mealAdapter = new MealAdapter(mealsList);
+                binding.recyclerView.setAdapter(mealAdapter);
             });
         });
-    }
-
-    private void updateMealsLayout(List<Meals> mealsList) {
-        LayoutInflater inflater = LayoutInflater.from(this);
-        LinearLayout layout = binding.mealsLayout;
-
-        layout.removeAllViews();
-
-        for (Meals meal : mealsList) {
-            View itemView = inflater.inflate(R.layout.item_meal, layout, false);
-            ((TextView) itemView.findViewById(R.id.titleTextView)).setText(String.format(Locale.US, "Meal: %s", meal.getMeal()));
-            ((TextView) itemView.findViewById(R.id.detailsTextView)).setText(String.format(Locale.US, "Date: %s\nCalories: %.2f",
-                    meal.getDate(), meal.getCalories()));
-            layout.addView(itemView);
-        }
     }
 }

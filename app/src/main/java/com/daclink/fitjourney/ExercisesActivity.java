@@ -1,20 +1,16 @@
+// com/daclink/fitjourney/ExercisesActivity.java
 package com.daclink.fitjourney;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
 import com.daclink.fitjourney.Database.FitJourneyRepository;
 import com.daclink.fitjourney.Database.entities.Exercise;
 import com.daclink.fitjourney.databinding.ActivityExercisesBinding;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -23,6 +19,7 @@ public class ExercisesActivity extends AppCompatActivity {
     private ActivityExercisesBinding binding;
     private FitJourneyRepository repository;
     private ExecutorService executorService;
+    private ExerciseAdapter exerciseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +29,17 @@ public class ExercisesActivity extends AppCompatActivity {
 
         executorService = Executors.newSingleThreadExecutor(); // Initialize ExecutorService
 
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        exerciseAdapter = new ExerciseAdapter(new ArrayList<>()); // Initialize with an empty list
+        binding.recyclerView.setAdapter(exerciseAdapter);
+
         executorService.execute(() -> {
             repository = new FitJourneyRepository(getApplication());
             runOnUiThread(this::loadExercises); // Load after repository initialization
         });
 
         binding.homeButton.setOnClickListener(v -> {
-           startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext()));
+            startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext()));
         });
 
         binding.submitButton.setOnClickListener(v -> {
@@ -76,23 +77,9 @@ public class ExercisesActivity extends AppCompatActivity {
         executorService.execute(() -> {
             List<Exercise> exercisesList = repository.getAllExercises();
             runOnUiThread(() -> {
-                updateExercisesLayout(exercisesList);
+                exerciseAdapter = new ExerciseAdapter(exercisesList);
+                binding.recyclerView.setAdapter(exerciseAdapter);
             });
         });
-    }
-
-    private void updateExercisesLayout(List<Exercise> exercisesList) {
-        LayoutInflater inflater = LayoutInflater.from(this);
-        LinearLayout layout = binding.exercisesLayout;
-
-        layout.removeAllViews();
-
-        for (Exercise exercise : exercisesList) {
-            View itemView = inflater.inflate(R.layout.item_exercise, layout, false);
-            ((TextView) itemView.findViewById(R.id.titleTextView)).setText(String.format(Locale.US, "Exercise: %s", exercise.getName()));
-            ((TextView) itemView.findViewById(R.id.detailsTextView)).setText(String.format(Locale.US, "Date: %s\nDuration: %.2f minutes",
-                    exercise.getDate(), exercise.getDuration()));
-            layout.addView(itemView);
-        }
     }
 }
