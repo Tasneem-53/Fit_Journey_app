@@ -28,7 +28,7 @@ public class ProgressActivity extends AppCompatActivity {
         binding = ActivityProgressBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        executorService = Executors.newSingleThreadExecutor(); // Initialize ExecutorService
+        executorService = Executors.newSingleThreadExecutor(); // ExecutorService
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         progressAdapter = new ProgressAdapter(new ArrayList<>()); // Initialize with an empty list
@@ -36,7 +36,7 @@ public class ProgressActivity extends AppCompatActivity {
 
         executorService.execute(() -> {
             repository = new FitJourneyRepository(getApplication());
-            runOnUiThread(this::fetchDataAndDisplay); // Load after repository initialization
+            runOnUiThread(this::fetchDataAndDisplay);
         });
 
         binding.homeButton.setOnClickListener(v -> {

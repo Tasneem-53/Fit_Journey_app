@@ -28,10 +28,10 @@ public class MealsActivity extends AppCompatActivity {
         binding = ActivityMealsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        executorService = Executors.newSingleThreadExecutor(); // Initialize ExecutorService
+        executorService = Executors.newSingleThreadExecutor(); //  ExecutorService
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mealAdapter = new MealAdapter(new ArrayList<>()); // Initialize with an empty list
+        mealAdapter = new MealAdapter(new ArrayList<>());
         binding.recyclerView.setAdapter(mealAdapter);
 
         executorService.execute(() -> {

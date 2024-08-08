@@ -27,10 +27,10 @@ public class ExercisesActivity extends AppCompatActivity {
         binding = ActivityExercisesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        executorService = Executors.newSingleThreadExecutor(); // Initialize ExecutorService
+        executorService = Executors.newSingleThreadExecutor(); // ExecutorService
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        exerciseAdapter = new ExerciseAdapter(new ArrayList<>()); // Initialize with an empty list
+        exerciseAdapter = new ExerciseAdapter(new ArrayList<>());
         binding.recyclerView.setAdapter(exerciseAdapter);
 
         executorService.execute(() -> {
