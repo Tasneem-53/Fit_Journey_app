@@ -39,6 +39,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         loggedInUserId = getLoggedInUserId();
 
+        binding.homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(IntentFactory.welcomeIntentFactory(getApplicationContext()));
+            }
+        });
+
         binding.changeButton.setOnClickListener(v -> {
             resetPassword();
         });
