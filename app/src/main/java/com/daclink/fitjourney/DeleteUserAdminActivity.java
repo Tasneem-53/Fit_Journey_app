@@ -25,8 +25,6 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
         binding = ActivityDeleteUserAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-       // binding.userLogTextView.setMovementMethod(new ScrollingMovementMethod());
-
         db = FitJourneyDatabase.getDatabase(getApplicationContext());
 
         binding.homeNav.setOnClickListener(new View.OnClickListener() {
@@ -45,15 +43,6 @@ public class DeleteUserAdminActivity extends AppCompatActivity {
                     Toast.makeText(DeleteUserAdminActivity.this, "Please enter a User ID", Toast.LENGTH_SHORT).show();
                     return;
                 }
-/*
-                int userIdInt;
-                try {
-                    userIdInt = Integer.parseInt(userId);
-                } catch (NumberFormatException e) {
-                    Toast.makeText(DeleteUserAdminActivity.this, "Invalid User ID", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-*/
                 deleteUser(username);
             }
         });

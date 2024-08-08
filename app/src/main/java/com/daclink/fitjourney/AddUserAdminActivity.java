@@ -30,7 +30,6 @@ public class AddUserAdminActivity extends AppCompatActivity {
 
         db = FitJourneyDatabase.getDatabase(getApplicationContext());
 
-
         binding.homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,15 +71,5 @@ public class AddUserAdminActivity extends AppCompatActivity {
                 }
             });
         });
-
-        /*  User newAdmin = new User(username, password);
-        newAdmin.setAdmin(true);
-        FitJourneyDatabase.databaseWriteExecutor.execute(() -> {
-            db.userDAO().insert(newAdmin);
-            runOnUiThread(() -> {
-                Toast.makeText(this, "Admin added successfully", Toast.LENGTH_SHORT).show();
-            });
-        });
-
-  */  }
+     }
 }
